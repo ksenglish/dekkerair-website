@@ -97,6 +97,10 @@ export default function Navbar() {
             style={{ padding: '12px', border: '1px solid #1a1a1a', borderRadius: 4, textAlign: 'center', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             Get a Quote
           </a>
+          <a href="https://app.dekkerair.co.nz" target="_blank" rel="noreferrer"
+            style={{ padding: '12px', background: '#1a1a1a', color: 'white', borderRadius: 4, textAlign: 'center', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            Portal
+          </a>
         </div>
       )}
 

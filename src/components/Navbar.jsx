@@ -69,6 +69,14 @@ export default function Navbar() {
           onMouseEnter={e => { e.currentTarget.style.background = '#1a1a1a'; e.currentTarget.style.color = 'white' }}
           onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#1a1a1a' }}
           >Get a Quote</a>
+          <a href="https://app.dekkerair.co.nz" target="_blank" rel="noreferrer" style={{
+            padding: '11px 24px', background: '#1a1a1a', borderRadius: 4,
+            fontSize: 14, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: 'white', transition: 'background 0.15s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = '#444'}
+          onMouseLeave={e => e.currentTarget.style.background = '#1a1a1a'}
+          >Portal</a>
         </div>
 
         {/* Hamburger */}

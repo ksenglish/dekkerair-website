@@ -60,7 +60,7 @@ export default function Services() {
                 paddingBottom: 1,
                 transition: 'color 0.15s, border-color 0.15s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.color = '#d1000a'; e.currentTarget.style.borderColor = '#d1000a' }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#1a1a1a'; e.currentTarget.style.borderColor = '#1a1a1a' }}
               onMouseLeave={e => { e.currentTarget.style.color = '#1a1a1a'; e.currentTarget.style.borderColor = '#1a1a1a' }}
               >Learn More &gt;</a>
             </div>

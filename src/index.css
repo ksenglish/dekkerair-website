@@ -1,8 +1,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --red: #d1000a;
-  --red-dark: #a80008;
+  --red: #1a1a1a;
+  --red-dark: #000000;
   --dark: #1a1a1a;
   --mid: #404040;
   --muted: #6b7280;

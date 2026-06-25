@@ -54,7 +54,7 @@ export default function Contact() {
                   <div>
                     <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>{c.label}</div>
                     {c.href
-                      ? <a href={c.href} style={{ fontSize: 16, fontWeight: 600, color: '#d1000a' }}>{c.value}</a>
+                      ? <a href={c.href} style={{ fontSize: 16, fontWeight: 600, color: '#1a1a1a' }}>{c.value}</a>
                       : <div style={{ fontSize: 15, fontWeight: 500 }}>{c.value}</div>
                     }
                   </div>
@@ -85,14 +85,14 @@ export default function Contact() {
                     <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 5 }}>Name *</label>
                     <input required style={inputStyle} placeholder="Your name" value={form.name}
                       onChange={e => set('name', e.target.value)}
-                      onFocus={e => e.target.style.borderColor = '#d1000a'}
+                      onFocus={e => e.target.style.borderColor = '#1a1a1a'}
                       onBlur={e => e.target.style.borderColor = 'var(--border)'} />
                   </div>
                   <div>
                     <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 5 }}>Phone</label>
                     <input style={inputStyle} placeholder="Your phone" value={form.phone}
                       onChange={e => set('phone', e.target.value)}
-                      onFocus={e => e.target.style.borderColor = '#d1000a'}
+                      onFocus={e => e.target.style.borderColor = '#1a1a1a'}
                       onBlur={e => e.target.style.borderColor = 'var(--border)'} />
                   </div>
                 </div>
@@ -101,7 +101,7 @@ export default function Contact() {
                   <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 5 }}>Email *</label>
                   <input required type="email" style={inputStyle} placeholder="your@email.com" value={form.email}
                     onChange={e => set('email', e.target.value)}
-                    onFocus={e => e.target.style.borderColor = '#d1000a'}
+                    onFocus={e => e.target.style.borderColor = '#1a1a1a'}
                     onBlur={e => e.target.style.borderColor = 'var(--border)'} />
                 </div>
 
@@ -109,7 +109,7 @@ export default function Contact() {
                   <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 5 }}>Service Required</label>
                   <select style={{ ...inputStyle, cursor: 'pointer' }} value={form.service}
                     onChange={e => set('service', e.target.value)}
-                    onFocus={e => e.target.style.borderColor = '#d1000a'}
+                    onFocus={e => e.target.style.borderColor = '#1a1a1a'}
                     onBlur={e => e.target.style.borderColor = 'var(--border)'}>
                     <option value="">Select a service...</option>
                     {services.map(s => <option key={s} value={s}>{s}</option>)}
@@ -121,7 +121,7 @@ export default function Contact() {
                   <textarea style={{ ...inputStyle, resize: 'vertical', minHeight: 100 }}
                     placeholder="Tell us a bit about your project..."
                     value={form.message} onChange={e => set('message', e.target.value)}
-                    onFocus={e => e.target.style.borderColor = '#d1000a'}
+                    onFocus={e => e.target.style.borderColor = '#1a1a1a'}
                     onBlur={e => e.target.style.borderColor = 'var(--border)'} />
                 </div>
 

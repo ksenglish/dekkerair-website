@@ -20,7 +20,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <a href="#" style={{ flexShrink: 0 }}>
-          <img src={logo} alt="Dekker Air" style={{ height: 52, width: 'auto', objectFit: 'contain' }} />
+          <img src={logo} alt="Dekker Air" style={{ height: 104, width: 'auto', objectFit: 'contain' }} />
         </a>
 
         {/* Desktop nav — centred */}
@@ -30,7 +30,7 @@ export default function Navbar() {
               fontSize: 15, fontWeight: 500, color: '#1a1a1a',
               letterSpacing: '0.02em', transition: 'color 0.15s',
             }}
-            onMouseEnter={e => e.target.style.color = '#d1000a'}
+            onMouseEnter={e => e.target.style.color = '#555'}
             onMouseLeave={e => e.target.style.color = '#1a1a1a'}
             >{l.label}</a>
           ))}
@@ -38,12 +38,12 @@ export default function Navbar() {
 
         {/* Right — icons + CTA */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }} className="desktop-nav">
-          <a href="tel:0800477123" title="Call us" style={{ color: '#404040', fontSize: 20, transition: 'color 0.15s' }}
-            onMouseEnter={e => e.target.style.color = '#d1000a'}
-            onMouseLeave={e => e.target.style.color = '#404040'}>📞</a>
-          <a href="mailto:office@dekkergroup.co.nz" title="Email us" style={{ color: '#404040', fontSize: 20, transition: 'color 0.15s' }}
-            onMouseEnter={e => e.target.style.color = '#d1000a'}
-            onMouseLeave={e => e.target.style.color = '#404040'}>✉️</a>
+          <a href="tel:0800477123" title="Call us" style={{ color: '#000', fontSize: 20, transition: 'opacity 0.15s' }}
+            onMouseEnter={e => e.target.style.opacity = '0.6'}
+            onMouseLeave={e => e.target.style.opacity = '1'}>📞</a>
+          <a href="mailto:office@dekkergroup.co.nz" title="Email us" style={{ color: '#000', fontSize: 20, transition: 'opacity 0.15s' }}
+            onMouseEnter={e => e.target.style.opacity = '0.6'}
+            onMouseLeave={e => e.target.style.opacity = '1'}>✉️</a>
           <a href="#contact" style={{
             padding: '10px 22px', border: '1px solid #1a1a1a', borderRadius: 4,
             fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',

@@ -3,7 +3,7 @@ import { useState } from 'react'
 const services = ['Heating', 'Cooling', 'Ventilation', 'HVAC Servicing', 'Not sure yet']
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '', website: '' })
   const [status, setStatus] = useState(null) // null | 'sending' | 'sent' | 'error'
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
@@ -11,9 +11,25 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('sending')
-    // TODO: wire up to a form backend (e.g. Resend, Formspree, or your own API)
-    // For now simulate success
-    setTimeout(() => setStatus('sent'), 1200)
+    try {
+      const res = await fetch('https://app.dekkerair.co.nz/api/leads/webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          service_required: form.service,
+          message: form.message,
+          source: 'Dekker Air-Website-Contact Form',
+          website: form.website, // honeypot — real visitors never fill this in
+        }),
+      })
+      if (!res.ok) throw new Error('Request failed')
+      setStatus('sent')
+    } catch {
+      setStatus('error')
+    }
   }
 
   const inputStyle = {
@@ -80,6 +96,9 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <input type="text" name="website" value={form.website} onChange={e => set('website', e.target.value)}
+                  autoComplete="off" tabIndex={-1}
+                  style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }} aria-hidden="true" />
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <div>
                     <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 5 }}>Name *</label>
@@ -124,6 +143,12 @@ export default function Contact() {
                     onFocus={e => e.target.style.borderColor = '#1a1a1a'}
                     onBlur={e => e.target.style.borderColor = 'var(--border)'} />
                 </div>
+
+                {status === 'error' && (
+                  <p style={{ color: '#dc2626', fontSize: 14, margin: 0 }}>
+                    Something went wrong sending your enquiry — please try again, or call us on 0800 477 123.
+                  </p>
+                )}
 
                 <button type="submit" disabled={status === 'sending'} className="btn btn-primary"
                   style={{ width: '100%', padding: '14px', fontSize: 16, opacity: status === 'sending' ? 0.7 : 1 }}>

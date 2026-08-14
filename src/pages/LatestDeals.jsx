@@ -23,8 +23,8 @@ function DealCard({ deal }) {
         alt={deal.imageAlt}
         loading="lazy"
         decoding="async"
-        width={1080}
-        height={1080}
+        width={1000}
+        height={1000}
         // height:auto is needed so the height attribute above (which is there to
         // reserve space and avoid layout shift) doesn't override aspect-ratio.
         style={{ width: '100%', height: 'auto', aspectRatio: '1 / 1', objectFit: 'cover' }}

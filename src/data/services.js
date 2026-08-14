@@ -7,6 +7,8 @@ export const services = [
     slug: 'heating',
     title: 'Heating',
     icon: '☀️',
+    // Renders the sizing calculator on this page — see ServicePage.jsx
+    calculator: 'heat-pump',
     tagline: 'Warm, dry homes that cost less to run.',
     summary: 'Efficient heating solutions designed to keep your home warm, comfortable and energy efficient through every season.',
     metaDescription: 'Heat pump and home heating installation across the Bay of Plenty. Dekker Air sizes, supplies and installs efficient heating for homes and businesses.',

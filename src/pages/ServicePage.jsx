@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import PageHero from '../components/PageHero'
 import CTABand from '../components/CTABand'
 import ContactForm from '../components/ContactForm'
+import HeatPumpCalculator from '../components/HeatPumpCalculator'
 import { services, getService } from '../data/services'
 import usePageMeta from '../hooks/usePageMeta'
 
@@ -114,6 +115,8 @@ export default function ServicePage({ slug }) {
           </div>
         </div>
       </section>
+
+      {service.calculator === 'heat-pump' && <HeatPumpCalculator />}
 
       {/* FAQ + enquiry form */}
       <section style={{ padding: '80px 0', background: 'white' }}>

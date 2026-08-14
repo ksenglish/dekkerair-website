@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { services } from '../data/services'
+import { LEAD_WEBHOOK } from '../config'
 
 const serviceOptions = [...services.map(s => s.title), 'Not sure yet']
 
@@ -17,7 +18,7 @@ export default function ContactForm({ defaultService = '', source = 'Dekker Air-
     e.preventDefault()
     setStatus('sending')
     try {
-      const res = await fetch('https://app.dekkerair.co.nz/api/leads/webhook', {
+      const res = await fetch(LEAD_WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const reasons = [
   { icon: '🏆', title: 'Experienced Team', desc: 'Our certified technicians bring years of hands-on experience to every installation and service job.' },
   { icon: '⚡', title: 'Fast Response', desc: 'We understand when your heating or cooling fails it\'s urgent. We aim to respond quickly and get you sorted.' },
@@ -11,7 +13,7 @@ export default function WhyUs() {
   return (
     <section id="why-us" style={{ padding: '96px 0', background: 'var(--light)' }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+        <div className="why-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
 
           <div>
             <div className="section-label">Why Choose Us</div>
@@ -20,10 +22,10 @@ export default function WhyUs() {
               We're not just another HVAC company. We're a local team that genuinely cares
               about your comfort, your home, and your energy bills.
             </p>
-            <a href="#contact" className="btn btn-primary">Talk to Our Team</a>
+            <Link to="/contact" className="btn btn-primary">Talk to Our Team</Link>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+          <div className="why-cards" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
             {reasons.map(r => (
               <div key={r.title} style={{
                 background: 'white',
@@ -43,7 +45,7 @@ export default function WhyUs() {
 
       <style>{`
         @media (max-width: 768px) {
-          #why-us .container > div { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .why-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
         }
       `}</style>
     </section>

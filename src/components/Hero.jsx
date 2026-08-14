@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Hero() {
   return (
     <section style={{
@@ -29,7 +31,7 @@ export default function Hero() {
           with <span style={{ fontWeight: 700 }}>DEKKER AIR</span>
         </h1>
 
-        <a href="#contact" style={{
+        <Link to="/contact" style={{
           display: 'inline-block',
           padding: '14px 40px',
           border: '1px solid rgba(255,255,255,0.8)',
@@ -45,7 +47,7 @@ export default function Hero() {
         }}
         onMouseEnter={e => { e.currentTarget.style.background = 'white'; e.currentTarget.style.color = '#1a1a1a' }}
         onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'white' }}
-        >Contact Us</a>
+        >Contact Us</Link>
       </div>
     </section>
   )

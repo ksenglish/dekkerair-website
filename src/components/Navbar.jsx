@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import logo from '/dekkerair-logo.jpg'
+import { services } from '../data/services'
 
 const PhoneIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -14,14 +16,23 @@ const MailIcon = () => (
   </svg>
 )
 
+const linkStyle = (isActive) => ({
+  fontSize: 17,
+  fontWeight: 500,
+  color: '#1a1a1a',
+  letterSpacing: '0.02em',
+  paddingBottom: 4,
+  borderBottom: isActive ? '2px solid #1a1a1a' : '2px solid transparent',
+  transition: 'opacity 0.15s',
+})
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const { pathname } = useLocation()
 
-  const links = [
-    { label: 'Latest Deals', href: '#deals' },
-    { label: 'Our Services', href: '#services' },
-    { label: 'Contact Us', href: '#contact' },
-  ]
+  const onServicePage = services.some(s => `/${s.slug}` === pathname)
+  const closeAll = () => { setMenuOpen(false); setServicesOpen(false) }
 
   return (
     <header style={{
@@ -32,21 +43,71 @@ export default function Navbar() {
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 120 }}>
 
         {/* Logo */}
-        <a href="#" style={{ flexShrink: 0 }}>
+        <Link to="/" onClick={closeAll} style={{ flexShrink: 0 }}>
           <img src={logo} alt="Dekker Air" style={{ height: 100, width: 'auto', objectFit: 'contain' }} />
-        </a>
+        </Link>
 
         {/* Desktop nav — centred */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 48 }} className="desktop-nav">
-          {links.map(l => (
-            <a key={l.href} href={l.href} style={{
-              fontSize: 17, fontWeight: 500, color: '#1a1a1a',
-              letterSpacing: '0.02em', transition: 'color 0.15s',
-            }}
-            onMouseEnter={e => e.target.style.color = '#555'}
-            onMouseLeave={e => e.target.style.color = '#1a1a1a'}
-            >{l.label}</a>
-          ))}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: 40 }} className="desktop-nav">
+
+          {/* Services dropdown */}
+          <div
+            style={{ position: 'relative' }}
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+            onKeyDown={e => { if (e.key === 'Escape') setServicesOpen(false) }}
+          >
+            <button
+              // Opens rather than toggles: hovering already opened it, so a
+              // toggle here would just shut it again under the cursor.
+              onClick={() => setServicesOpen(true)}
+              onFocus={() => setServicesOpen(true)}
+              aria-expanded={servicesOpen}
+              style={{
+                ...linkStyle(onServicePage),
+                background: 'none',
+                display: 'flex', alignItems: 'center', gap: 6,
+                fontFamily: 'inherit',
+              }}
+            >
+              Our Services
+              <span style={{
+                fontSize: 10,
+                transform: servicesOpen ? 'rotate(180deg)' : 'none',
+                transition: 'transform 0.15s',
+              }}>▼</span>
+            </button>
+
+            {servicesOpen && (
+              <div style={{
+                position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)',
+                marginTop: 14, minWidth: 240,
+                background: 'white',
+                border: '1px solid var(--border)',
+                borderRadius: 6,
+                boxShadow: 'var(--shadow-lg)',
+                padding: '8px 0',
+              }}>
+                {services.map(s => (
+                  <Link key={s.slug} to={`/${s.slug}`} onClick={closeAll}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 12,
+                      padding: '11px 18px', fontSize: 15, color: '#1a1a1a',
+                      transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'var(--light)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    <span style={{ fontSize: 17 }}>{s.icon}</span>
+                    {s.title}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <NavLink to="/deals" style={({ isActive }) => linkStyle(isActive)}>Latest Deals</NavLink>
+          <NavLink to="/contact" style={({ isActive }) => linkStyle(isActive)}>Contact Us</NavLink>
         </nav>
 
         {/* Right — icons + CTA */}
@@ -61,14 +122,14 @@ export default function Navbar() {
             onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
             <MailIcon />
           </a>
-          <a href="#contact" style={{
+          <Link to="/contact" style={{
             padding: '11px 24px', border: '1px solid #1a1a1a', borderRadius: 4,
             fontSize: 14, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
-            color: '#1a1a1a', transition: 'all 0.15s',
+            color: '#1a1a1a', transition: 'all 0.15s', whiteSpace: 'nowrap',
           }}
           onMouseEnter={e => { e.currentTarget.style.background = '#1a1a1a'; e.currentTarget.style.color = 'white' }}
           onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#1a1a1a' }}
-          >Get a Quote</a>
+          >Get a Quote</Link>
           <a href="https://app.dekkerair.co.nz" target="_blank" rel="noreferrer" style={{
             padding: '11px 24px', background: '#1a1a1a', borderRadius: 4,
             fontSize: 14, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
@@ -81,6 +142,7 @@ export default function Navbar() {
 
         {/* Hamburger */}
         <button onClick={() => setMenuOpen(m => !m)} className="hamburger"
+          aria-label="Menu" aria-expanded={menuOpen}
           style={{ display: 'none', background: 'none', border: 'none', fontSize: 26, color: '#1a1a1a' }}>
           {menuOpen ? '✕' : '☰'}
         </button>
@@ -88,15 +150,31 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div style={{ background: 'white', borderTop: '1px solid #e5e7eb', padding: '16px 24px 20px', display: 'flex', flexDirection: 'column', gap: 16 }}>
-          {links.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
-              style={{ fontSize: 16, fontWeight: 500, color: '#1a1a1a' }}>{l.label}</a>
+        <div style={{
+          background: 'white', borderTop: '1px solid var(--border)',
+          padding: '16px 24px 20px', display: 'flex', flexDirection: 'column', gap: 16,
+          maxHeight: 'calc(100vh - 120px)', overflowY: 'auto',
+        }}>
+          <div style={{
+            fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
+            textTransform: 'uppercase', color: 'var(--muted)',
+          }}>Our Services</div>
+          {services.map(s => (
+            <Link key={s.slug} to={`/${s.slug}`} onClick={closeAll}
+              style={{ fontSize: 16, fontWeight: 500, color: '#1a1a1a', paddingLeft: 4 }}>
+              {s.icon}&nbsp;&nbsp;{s.title}
+            </Link>
           ))}
-          <a href="#contact" onClick={() => setMenuOpen(false)}
+
+          <div style={{ height: 1, background: 'var(--border)' }} />
+
+          <Link to="/deals" onClick={closeAll} style={{ fontSize: 16, fontWeight: 500, color: '#1a1a1a' }}>Latest Deals</Link>
+          <Link to="/contact" onClick={closeAll} style={{ fontSize: 16, fontWeight: 500, color: '#1a1a1a' }}>Contact Us</Link>
+
+          <Link to="/contact" onClick={closeAll}
             style={{ padding: '12px', border: '1px solid #1a1a1a', borderRadius: 4, textAlign: 'center', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             Get a Quote
-          </a>
+          </Link>
           <a href="https://app.dekkerair.co.nz" target="_blank" rel="noreferrer"
             style={{ padding: '12px', background: '#1a1a1a', color: 'white', borderRadius: 4, textAlign: 'center', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             Portal
@@ -105,7 +183,7 @@ export default function Navbar() {
       )}
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: block !important; }
         }

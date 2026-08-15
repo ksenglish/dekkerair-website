@@ -256,17 +256,27 @@ export default function HeatPumpCalculator() {
 
                 {match && (
                   <>
-                    <div style={{ borderTop: '1px solid var(--border)', marginTop: 8 }}>
-                      <Row><span style={{ color: 'var(--muted)' }}>Recommended model</span><strong>{match.model}</strong></Row>
-                      <Row><span style={{ color: 'var(--muted)' }}>Unit</span><strong style={{ textAlign: 'right' }}>{match.description}</strong></Row>
-                      <Row>
-                        <span style={{ color: 'var(--muted)' }}>Installed, inc GST</span>
-                        <strong style={{ fontSize: 20 }}>
+                    {/* The specific model and unit description are deliberately not
+                        shown to the customer — they still travel with the enquiry so
+                        the team knows what was sized. */}
+                    <div className="rec-price" style={{
+                      display: 'flex', alignItems: 'center', gap: 22,
+                      borderTop: '1px solid var(--border)', marginTop: 8, paddingTop: 22,
+                    }}>
+                      <div>
+                        <div style={{
+                          fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
+                          textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 6,
+                        }}>Starting from</div>
+                        <div style={{ fontSize: 34, fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.02em' }}>
                           {match.installedPriceIncGstCents != null
                             ? nzd(match.installedPriceIncGstCents)
                             : 'On request'}
-                        </strong>
-                      </Row>
+                        </div>
+                        <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
+                          Installed, inc GST
+                        </div>
+                      </div>
                     </div>
 
                     <button type="button" onClick={addToBasket} className="btn btn-primary"
@@ -304,7 +314,7 @@ export default function HeatPumpCalculator() {
                 <div>
                   <div style={{ fontWeight: 700, fontSize: 15 }}>{item.room}</div>
                   <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6, marginTop: 2 }}>
-                    {item.area} m² · {item.kw} kW · {item.model} ({item.description})
+                    {item.area} m² · {item.kw} kW required
                   </div>
                 </div>
 

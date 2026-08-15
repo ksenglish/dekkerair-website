@@ -260,9 +260,22 @@ export default function HeatPumpCalculator() {
                         shown to the customer — they still travel with the enquiry so
                         the team knows what was sized. */}
                     <div className="rec-price" style={{
-                      display: 'flex', alignItems: 'center', gap: 22,
+                      display: 'flex', alignItems: 'center', gap: 22, flexWrap: 'wrap',
                       borderTop: '1px solid var(--border)', marginTop: 8, paddingTop: 22,
                     }}>
+                      {kw > 0.1 && (
+                        <img
+                          src="/heat-pump.webp"
+                          alt="High wall heat pump indoor unit"
+                          width={600}
+                          height={330}
+                          loading="lazy"
+                          decoding="async"
+                          // height:auto so the height attribute above, which is
+                          // there to reserve space, can't override the ratio.
+                          style={{ width: 190, height: 'auto', flexShrink: 0 }}
+                        />
+                      )}
                       <div>
                         <div style={{
                           fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',

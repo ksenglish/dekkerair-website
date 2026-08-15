@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import logo from '/dekkerair-logo.jpg'
 import { services } from '../data/services'
@@ -29,10 +29,29 @@ const linkStyle = (isActive) => ({
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  // Hovering opens the menu transiently; clicking pins it so it survives the
+  // pointer leaving, until you click away or press Escape.
+  const [servicesPinned, setServicesPinned] = useState(false)
+  const servicesRef = useRef(null)
   const { pathname } = useLocation()
 
   const onServicePage = services.some(s => `/${s.slug}` === pathname)
-  const closeAll = () => { setMenuOpen(false); setServicesOpen(false) }
+  const closeServices = () => { setServicesOpen(false); setServicesPinned(false) }
+  const closeAll = () => { setMenuOpen(false); closeServices() }
+
+  useEffect(() => {
+    if (!servicesPinned) return
+    const onDocMouseDown = e => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target)) closeServices()
+    }
+    const onKeyDown = e => { if (e.key === 'Escape') closeServices() }
+    document.addEventListener('mousedown', onDocMouseDown)
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', onDocMouseDown)
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [servicesPinned])
 
   return (
     <header style={{
@@ -52,15 +71,16 @@ export default function Navbar() {
 
           {/* Services dropdown */}
           <div
+            ref={servicesRef}
             style={{ position: 'relative' }}
             onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
-            onKeyDown={e => { if (e.key === 'Escape') setServicesOpen(false) }}
+            onMouseLeave={() => { if (!servicesPinned) setServicesOpen(false) }}
+            onKeyDown={e => { if (e.key === 'Escape') closeServices() }}
           >
             <button
-              // Opens rather than toggles: hovering already opened it, so a
-              // toggle here would just shut it again under the cursor.
-              onClick={() => setServicesOpen(true)}
+              // Click pins the menu open so it holds while you pick a service.
+              // Clicking again releases the pin; hover still governs from there.
+              onClick={() => { setServicesPinned(p => !p); setServicesOpen(true) }}
               onFocus={() => setServicesOpen(true)}
               aria-expanded={servicesOpen}
               style={{
@@ -79,9 +99,16 @@ export default function Navbar() {
             </button>
 
             {servicesOpen && (
+              // The outer element starts flush against the button and uses
+              // padding — not margin — for the visual gap, so the pointer stays
+              // inside it on the way down to the menu. With a margin there, that
+              // gap was dead space outside the dropdown and moving across it
+              // fired mouseleave and shut the menu.
               <div style={{
                 position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)',
-                marginTop: 14, minWidth: 240,
+                paddingTop: 14, minWidth: 240,
+              }}>
+              <div style={{
                 background: 'white',
                 border: '1px solid var(--border)',
                 borderRadius: 6,
@@ -102,6 +129,7 @@ export default function Navbar() {
                     {s.title}
                   </Link>
                 ))}
+              </div>
               </div>
             )}
           </div>

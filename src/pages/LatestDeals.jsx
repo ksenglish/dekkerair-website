@@ -4,6 +4,9 @@ import CTABand from '../components/CTABand'
 import { activeDeals, formatExpiry } from '../data/deals'
 import { getService } from '../data/services'
 import usePageMeta from '../hooks/usePageMeta'
+import useDeals from '../hooks/useDeals'
+import PreviewBanner from '../components/PreviewBanner'
+import { resolveImage } from '../config'
 
 function DealCard({ deal }) {
   const service = deal.service && getService(deal.service)
@@ -19,8 +22,8 @@ function DealCard({ deal }) {
       flexDirection: 'column',
     }}>
       <img
-        src={deal.image}
-        alt={deal.imageAlt}
+        src={resolveImage(deal.image)}
+        alt={deal.imageAlt || deal.title}
         loading="lazy"
         decoding="async"
         width={1000}
@@ -85,10 +88,13 @@ export default function LatestDeals() {
     'Current Dekker Air deals on heat pump installation, ducted heating, SmartVent home ventilation and heat pump servicing across the Bay of Plenty.',
   )
 
-  const live = activeDeals()
+  const { deals, loading, failed, preview } = useDeals()
+  const live = activeDeals(deals)
 
   return (
     <>
+      {preview && <PreviewBanner />}
+
       <PageHero
         label="Promotions"
         title="Latest Deals"
@@ -97,7 +103,21 @@ export default function LatestDeals() {
 
       <section style={{ padding: '80px 0', background: 'white' }}>
         <div className="container">
-          {live.length === 0 ? (
+          {loading ? (
+            <p style={{ textAlign: 'center', color: 'var(--muted)', padding: '40px 0' }}>Loading deals…</p>
+          ) : failed ? (
+            <div style={{
+              textAlign: 'center', padding: '48px 24px',
+              background: 'var(--light)', border: '1px solid var(--border)', borderRadius: 16,
+            }}>
+              <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 10 }}>We couldn't load our deals just now</h2>
+              <p style={{ fontSize: 15, color: 'var(--muted)', maxWidth: 480, margin: '0 auto 24px', lineHeight: 1.7 }}>
+                Give us a call on 0800 477 123 and we'll tell you what's running, or send
+                an enquiry and we'll come back to you with a quote.
+              </p>
+              <Link to="/contact" className="btn btn-primary">Request a Quote</Link>
+            </div>
+          ) : live.length === 0 ? (
             <div style={{
               textAlign: 'center', padding: '48px 24px',
               background: 'var(--light)', border: '1px solid var(--border)', borderRadius: 16,
@@ -120,13 +140,15 @@ export default function LatestDeals() {
             </div>
           )}
 
-          <p style={{
-            fontSize: 14, color: 'var(--muted)', lineHeight: 1.7,
-            marginTop: 40, textAlign: 'center', maxWidth: 640, marginInline: 'auto',
-          }}>
-            Prices shown are for standard installations. Every home is different, so we
-            confirm the final price with you in writing after we've seen the job.
-          </p>
+          {live.length > 0 && (
+            <p style={{
+              fontSize: 14, color: 'var(--muted)', lineHeight: 1.7,
+              marginTop: 40, textAlign: 'center', maxWidth: 640, marginInline: 'auto',
+            }}>
+              Prices shown are for standard installations. Every home is different, so we
+              confirm the final price with you in writing after we've seen the job.
+            </p>
+          )}
         </div>
       </section>
 

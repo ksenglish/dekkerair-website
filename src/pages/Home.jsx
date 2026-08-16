@@ -5,10 +5,14 @@ import WhyUs from '../components/WhyUs'
 import Contact from '../components/Contact'
 import { activeDeals } from '../data/deals'
 import usePageMeta from '../hooks/usePageMeta'
+import useDeals from '../hooks/useDeals'
+import PreviewBanner from '../components/PreviewBanner'
 
 function DealsBanner() {
-  const count = activeDeals().length
-  if (count === 0) return null
+  const { deals, loading, failed } = useDeals()
+  const count = activeDeals(deals).length
+  // Stay out of the way until we know there's something to shout about.
+  if (loading || failed || count === 0) return null
 
   return (
     <section style={{ background: '#1a1a1a', color: 'white', padding: '40px 0' }}>
@@ -45,8 +49,11 @@ export default function Home() {
     'Dekker Air provides professional heat pump installation, air conditioning, ventilation, and HVAC servicing across the Bay of Plenty and surrounding regions.',
   )
 
+  const { preview } = useDeals()
+
   return (
     <>
+      {preview && <PreviewBanner />}
       <Hero />
       <Services />
       <WhyUs />

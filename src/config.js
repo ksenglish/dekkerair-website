@@ -5,6 +5,7 @@ export const API_BASE = import.meta.env.VITE_API_BASE || 'https://app.dekkerair.
 
 export const LEAD_WEBHOOK = `${API_BASE}/api/leads/webhook`
 export const HEAT_PUMPS_ENDPOINT = `${API_BASE}/api/public/heat-pumps`
+export const VENTILATION_ENDPOINT = `${API_BASE}/api/public/ventilation-systems`
 export const DEALS_ENDPOINT = `${API_BASE}/api/public/website/deals`
 
 // Deal artwork is either a file in this repo (/deals/…) or an image uploaded

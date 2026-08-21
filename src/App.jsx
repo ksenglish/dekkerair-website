@@ -7,7 +7,9 @@ import ServicePage from './pages/ServicePage'
 import LatestDeals from './pages/LatestDeals'
 import ContactUs from './pages/ContactUs'
 import NotFound from './pages/NotFound'
+import VentilationType from './pages/VentilationType'
 import { services } from './data/services'
+import { ventilationTypes } from './data/ventilation'
 import './index.css'
 
 export default function App() {
@@ -22,6 +24,11 @@ export default function App() {
           {/* One route per service, e.g. /heating — driven by src/data/services.js */}
           {services.map(s => (
             <Route key={s.slug} path={`/${s.slug}`} element={<ServicePage slug={s.slug} />} />
+          ))}
+
+          {/* Ventilation has a page per kind — see src/data/ventilation.js */}
+          {ventilationTypes.map(v => (
+            <Route key={v.slug} path={`/ventilation/${v.slug}`} element={<VentilationType slug={v.slug} />} />
           ))}
 
           <Route path="/deals" element={<LatestDeals />} />

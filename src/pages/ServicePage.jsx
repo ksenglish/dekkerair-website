@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero'
 import CTABand from '../components/CTABand'
 import ContactForm from '../components/ContactForm'
 import HeatPumpCalculator from '../components/HeatPumpCalculator'
+import { ventilationTypes } from '../data/ventilation'
 import { services, getService } from '../data/services'
 import usePageMeta from '../hooks/usePageMeta'
 
@@ -117,6 +118,50 @@ export default function ServicePage({ slug }) {
       </section>
 
       {service.calculator === 'heat-pump' && <HeatPumpCalculator />}
+
+      {/* Ventilation splits into four kinds, each with its own page. */}
+      {service.slug === 'ventilation' && (
+        <section style={{ padding: '80px 0', background: 'var(--light)', borderTop: '1px solid var(--border)' }}>
+          <div className="container">
+            <div className="section-label">Choose your system</div>
+            <h2 className="section-title">Four ways to ventilate a home</h2>
+            <p className="section-subtitle" style={{ marginBottom: 40 }}>
+              Which one suits depends on how your house is built and where the moisture
+              is coming from. Read up on each, and size one for yourself.
+            </p>
+
+            <div style={{
+              display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24,
+            }}>
+              {ventilationTypes.map(v => (
+                <Link key={v.slug} to={`/ventilation/${v.slug}`} style={{
+                  background: 'white', border: '1px solid var(--border)', borderRadius: 14,
+                  padding: 30, display: 'flex', flexDirection: 'column',
+                  transition: 'border-color 0.15s, transform 0.15s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#1a1a1a'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none' }}
+                >
+                  <div style={{ fontSize: 32, marginBottom: 14 }}>{v.icon}</div>
+                  <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>{v.title}</h3>
+                  <p style={{ fontSize: 14.5, color: 'var(--muted)', lineHeight: 1.7, flex: 1 }}>{v.summary}</p>
+                  <span style={{
+                    marginTop: 18, fontSize: 13, fontWeight: 700, letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                  }}>
+                    Learn more →
+                  </span>
+                  {v.calculator && (
+                    <span style={{ fontSize: 12.5, color: 'var(--muted)', marginTop: 8 }}>
+                      Includes a sizing calculator
+                    </span>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* FAQ + enquiry form */}
       <section style={{ padding: '80px 0', background: 'white' }}>

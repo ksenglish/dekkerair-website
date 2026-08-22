@@ -25,6 +25,7 @@ function Row({ children }) {
 export default function SmartVentCalculator({ family, typeTitle }) {
   const [rows, setRows] = useState(null) // null = loading, [] = unavailable
   const [pricingEnabled, setPricingEnabled] = useState(false)
+  const [installPerOutlet, setInstallPerOutlet] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -34,6 +35,7 @@ export default function SmartVentCalculator({ family, typeTitle }) {
         if (cancelled) return
         setRows(data.systems || [])
         setPricingEnabled(!!data.pricingEnabled)
+        setInstallPerOutlet(data.installPerOutletIncGstCents ?? null)
       })
       .catch(() => { if (!cancelled) setRows([]) })
     return () => { cancelled = true }
@@ -206,8 +208,23 @@ export default function SmartVentCalculator({ family, typeTitle }) {
                           : 'On request'}
                       </div>
                       <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
-                        Installed, inc GST
+                        System only, inc GST
                       </div>
+
+                      {/* Installation is priced per outlet and confirmed on site,
+                          so it's shown as a "from" figure rather than folded in. */}
+                      {installPerOutlet != null && outletCount > 0 && (
+                        <div style={{
+                          marginTop: 16, paddingTop: 16, borderTop: '1px solid var(--border)',
+                          fontSize: 14, lineHeight: 1.7,
+                        }}>
+                          <strong>Installation from {nzd(installPerOutlet * outletCount)}</strong>
+                          <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 4 }}>
+                            {nzd(installPerOutlet)} per outlet × {outletCount}. Confirmed after a
+                            site visit — roof access and duct runs make the difference.
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {approximate && (

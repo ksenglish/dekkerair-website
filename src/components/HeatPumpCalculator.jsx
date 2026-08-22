@@ -40,6 +40,7 @@ export default function HeatPumpCalculator() {
   // ── price list ──────────────────────────────────────────────────────────────
   const [models, setModels] = useState(null) // null = loading, [] = unavailable
   const [pricingEnabled, setPricingEnabled] = useState(false)
+  const [installFrom, setInstallFrom] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -49,6 +50,7 @@ export default function HeatPumpCalculator() {
         if (cancelled) return
         setModels(data.models || [])
         setPricingEnabled(!!data.pricingEnabled)
+        setInstallFrom(data.installFromIncGstCents ?? null)
       })
       .catch(() => { if (!cancelled) setModels([]) })
     return () => { cancelled = true }
@@ -114,10 +116,10 @@ export default function HeatPumpCalculator() {
       `${n + 1}. ${i.room} — ${i.area} m² @ ${i.height} m stud, ${i.insulation} insulation`,
       `   Required capacity: ${i.kw} kW`,
       `   Recommended: ${i.model} (${i.description})`,
-      `   ${i.priceCents != null ? `Installed inc GST: ${nzd(i.priceCents)}` : 'Price: on request'}`,
+      `   ${i.priceCents != null ? `Unit only inc GST: ${nzd(i.priceCents)}` : 'Price: on request'}`,
       `   Quantity: ${i.qty}`,
     ].join('\n'))
-    if (totalCents != null) lines.push(`\nEstimated total (installed, inc GST): ${nzd(totalCents)}`)
+    if (totalCents != null) lines.push(`\nEstimated total (units only, inc GST): ${nzd(totalCents)}`)
     return lines.join('\n\n')
   }, [basket, totalCents])
 
@@ -287,8 +289,20 @@ export default function HeatPumpCalculator() {
                             : 'On request'}
                         </div>
                         <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
-                          Installed, inc GST
+                          Unit only, inc GST
                         </div>
+
+                        {/* Installation is its own charge and depends on the
+                            house, so it's a "from" figure rather than folded in. */}
+                        {installFrom != null && (
+                          <div style={{ fontSize: 13.5, lineHeight: 1.7, marginTop: 12 }}>
+                            <strong>Installation from {nzd(installFrom)}</strong>
+                            <div style={{ color: 'var(--muted)' }}>
+                              Confirmed after a site visit — pipe runs and wall access
+                              make the difference.
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -354,7 +368,7 @@ export default function HeatPumpCalculator() {
               display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 16,
             }}>
               <span style={{ fontSize: 16, fontWeight: 600 }}>
-                Estimated total {totalCents != null && <span style={{ color: 'var(--muted)', fontWeight: 400, fontSize: 14 }}>(installed, inc GST)</span>}
+                Estimated total {totalCents != null && <span style={{ color: 'var(--muted)', fontWeight: 400, fontSize: 14 }}>(units only, inc GST)</span>}
               </span>
               <strong style={{ fontSize: 26 }}>
                 {totalCents != null ? nzd(totalCents) : 'On request'}
@@ -362,9 +376,9 @@ export default function HeatPumpCalculator() {
             </div>
 
             <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7, marginTop: 14 }}>
-              An estimate for a standard installation, not a fixed quote. Pipe runs, wall
-              access and electrical work vary between homes, so we confirm the final price
-              in writing after we've seen the job.
+              Units only — installation is charged separately{installFrom != null ? `, from ${nzd(installFrom)} per unit` : ''}.
+              Pipe runs, wall access and electrical work vary between homes, so we confirm
+              the whole price in writing after we've seen the job.
             </p>
 
             {/* ── enquiry ── */}

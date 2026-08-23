@@ -84,8 +84,11 @@ export default function SmartVentCalculator({ family, typeTitle }) {
         `Outlets wanted: ${outletCount}`,
         match ? `Suggested system: ${match.system} — ${match.model}` : 'No system matched',
         match?.installedPriceIncGstCents != null
-          ? `Installed inc GST: ${nzd(match.installedPriceIncGstCents)}`
+          ? `Supply only inc GST: ${nzd(match.installedPriceIncGstCents)}`
           : 'Price: on request',
+        installPerOutlet != null && outletCount > 0
+          ? `Installation from: ${nzd(installPerOutlet * outletCount)} (${nzd(installPerOutlet)} per outlet)`
+          : '',
         approximate ? 'NOTE: matched on outlet count only — floor area fell outside the charted bands.' : '',
         contact.notes ? `\nCustomer notes:\n${contact.notes}` : '',
         '\nSizing is the website estimate — confirm on site visit.',
@@ -208,7 +211,7 @@ export default function SmartVentCalculator({ family, typeTitle }) {
                           : 'On request'}
                       </div>
                       <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
-                        System only, inc GST
+                        Supply Only, inc GST
                       </div>
 
                       {/* Installation is priced per outlet and confirmed on site,

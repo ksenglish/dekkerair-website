@@ -116,10 +116,10 @@ export default function HeatPumpCalculator() {
       `${n + 1}. ${i.room} — ${i.area} m² @ ${i.height} m stud, ${i.insulation} insulation`,
       `   Required capacity: ${i.kw} kW`,
       `   Recommended: ${i.model} (${i.description})`,
-      `   ${i.priceCents != null ? `Unit only inc GST: ${nzd(i.priceCents)}` : 'Price: on request'}`,
+      `   ${i.priceCents != null ? `Supply only inc GST: ${nzd(i.priceCents)}` : 'Price: on request'}`,
       `   Quantity: ${i.qty}`,
     ].join('\n'))
-    if (totalCents != null) lines.push(`\nEstimated total (units only, inc GST): ${nzd(totalCents)}`)
+    if (totalCents != null) lines.push(`\nEstimated total (supply only, inc GST): ${nzd(totalCents)}`)
     return lines.join('\n\n')
   }, [basket, totalCents])
 
@@ -289,7 +289,7 @@ export default function HeatPumpCalculator() {
                             : 'On request'}
                         </div>
                         <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
-                          Unit only, inc GST
+                          Supply Only, inc GST
                         </div>
 
                         {/* Installation is its own charge and depends on the
@@ -368,7 +368,7 @@ export default function HeatPumpCalculator() {
               display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 16,
             }}>
               <span style={{ fontSize: 16, fontWeight: 600 }}>
-                Estimated total {totalCents != null && <span style={{ color: 'var(--muted)', fontWeight: 400, fontSize: 14 }}>(units only, inc GST)</span>}
+                Estimated total {totalCents != null && <span style={{ color: 'var(--muted)', fontWeight: 400, fontSize: 14 }}>(supply only, inc GST)</span>}
               </span>
               <strong style={{ fontSize: 26 }}>
                 {totalCents != null ? nzd(totalCents) : 'On request'}
@@ -376,7 +376,7 @@ export default function HeatPumpCalculator() {
             </div>
 
             <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7, marginTop: 14 }}>
-              Units only — installation is charged separately{installFrom != null ? `, from ${nzd(installFrom)} per unit` : ''}.
+              Supply only — installation is charged separately{installFrom != null ? `, from ${nzd(installFrom)} per unit` : ''}.
               Pipe runs, wall access and electrical work vary between homes, so we confirm
               the whole price in writing after we've seen the job.
             </p>

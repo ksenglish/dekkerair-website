@@ -3,6 +3,7 @@ import PageHero from '../components/PageHero'
 import CTABand from '../components/CTABand'
 import ContactForm from '../components/ContactForm'
 import SmartVentCalculator from '../components/SmartVentCalculator'
+import ImageGallery from '../components/ImageGallery'
 import { ventilationTypes, getVentilationType } from '../data/ventilation'
 import usePageMeta from '../hooks/usePageMeta'
 
@@ -39,6 +40,12 @@ export default function VentilationType({ slug }) {
               background: 'var(--light)', border: '1px solid var(--border)',
               borderRadius: 16, padding: 32,
             }}>
+              {/* The diagram explains the system faster than the paragraphs do,
+                  so it sits alongside them rather than further down the page. */}
+              {type.diagram && (
+                <img src={type.diagram.src} alt={type.diagram.alt}
+                  style={{ width: '100%', height: 'auto', marginBottom: 26 }} />
+              )}
               <h3 style={{
                 fontSize: 13, fontWeight: 700, letterSpacing: '0.1em',
                 textTransform: 'uppercase', marginBottom: 18,
@@ -75,6 +82,12 @@ export default function VentilationType({ slug }) {
           </div>
         </div>
       </section>
+
+      <ImageGallery
+        images={type.images}
+        title={`${type.title} systems`}
+        intro="The systems we install, and how they're laid out in a house."
+      />
 
       {type.calculator && (
         <SmartVentCalculator family={type.calculator} typeTitle={type.title} />

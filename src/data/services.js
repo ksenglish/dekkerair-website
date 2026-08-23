@@ -9,6 +9,13 @@ export const services = [
     icon: '☀️',
     // Renders the sizing calculator on this page — see ServicePage.jsx
     calculator: 'heat-pump',
+    images: [
+      { src: '/images/heating/single-room.webp', caption: 'Single room high wall heat pump' },
+      { src: '/images/heating/whole-home-ducted.webp', caption: 'Whole home ducted heating' },
+      { src: '/images/heating/rinnai-pro-series-2.webp', caption: 'Rinnai Pro Series 2' },
+      { src: '/images/heating/rinnai-hydraheat.webp', caption: 'Rinnai Hydraheat' },
+      { src: '/images/heating/hot-water-heat-pump.webp', caption: 'Hot water heat pump' },
+    ],
     tagline: 'Warm, dry homes that cost less to run.',
     summary: 'Efficient heating solutions designed to keep your home warm, comfortable and energy efficient through every season.',
     metaDescription: 'Heat pump and home heating installation across the Bay of Plenty. Dekker Air sizes, supplies and installs efficient heating for homes and businesses.',
@@ -52,6 +59,10 @@ export const services = [
 
   {
     slug: 'cooling',
+    images: [
+      { src: '/images/cooling/multi-split.webp', caption: 'Multi-split air conditioning' },
+      { src: '/images/cooling/rinnai-ducted.webp', caption: 'Ducted air conditioning' },
+    ],
     title: 'Cooling',
     icon: '❄️',
     tagline: 'Air conditioning that holds the temperature you set.',
@@ -142,6 +153,11 @@ export const services = [
 
   {
     slug: 'hvac-servicing',
+    images: [
+      { src: '/images/hvac-servicing/filters.webp', caption: 'Filters, clean and clogged' },
+      { src: '/images/hvac-servicing/filter-box.webp', caption: 'Filter box' },
+      { src: '/images/hvac-servicing/smartvent-filter.webp', caption: 'SmartVent filter' },
+    ],
     title: 'HVAC Servicing',
     icon: '🔧',
     tagline: 'Catch the small faults before they become big ones.',

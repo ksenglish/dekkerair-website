@@ -66,7 +66,7 @@ export default function PositivePressureSystem({ slug }) {
                 <div style={{ fontSize: 13.5, color: 'var(--muted)', marginTop: 6, lineHeight: 1.7 }}>
                   Supply only, inc GST.
                   {installPerOutlet != null
-                    ? ` Installation from ${nzd(installPerOutlet)} per outlet, confirmed after a site visit.`
+                    ? ` Installation from ${nzd(installPerOutlet)}, confirmed after a site visit.`
                     : ' Installation quoted after a site visit.'}
                 </div>
                 <a href="#calculator" className="btn btn-primary" style={{ marginTop: 20 }}>

@@ -95,7 +95,7 @@ export default function SmartVentCalculator({ family, typeTitle, defaultSystem =
           ? `Supply only inc GST: ${nzd(match.installedPriceIncGstCents)}`
           : 'Price: on request',
         installPerOutlet != null && outletCount > 0
-          ? `Installation from: ${nzd(installPerOutlet * outletCount)} (${nzd(installPerOutlet)} per outlet)`
+          ? `Installation from: ${nzd(installPerOutlet * outletCount)}`
           : '',
         approximate ? 'NOTE: matched on outlet count only — floor area fell outside the charted bands.' : '',
         contact.notes ? `\nCustomer notes:\n${contact.notes}` : '',
@@ -236,7 +236,7 @@ export default function SmartVentCalculator({ family, typeTitle, defaultSystem =
                         }}>
                           <strong>Installation from {nzd(installPerOutlet * outletCount)}</strong>
                           <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 4 }}>
-                            {nzd(installPerOutlet)} per outlet × {outletCount}. Confirmed after a
+                            Confirmed after a
                             site visit — roof access and duct runs make the difference.
                           </div>
                         </div>

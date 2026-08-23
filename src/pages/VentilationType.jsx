@@ -14,6 +14,7 @@ export default function VentilationType({ slug }) {
   usePageMeta(`${type.title} Ventilation`, type.metaDescription)
 
   const others = ventilationTypes.filter(v => v.slug !== slug)
+  const hasSystems = type.systems === 'positive-pressure'
 
   return (
     <>
@@ -27,7 +28,13 @@ export default function VentilationType({ slug }) {
             <span style={{ color: '#1a1a1a', fontWeight: 600 }}>{type.title}</span>
           </nav>
 
-          <div className="split-grid" style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: 64, alignItems: 'start' }}>
+          {/* Where the systems are listed further down, the "what we do" list
+              repeats them — so that page gives the space to the diagram instead. */}
+          <div className="split-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: hasSystems ? '1fr 1.15fr' : '1.3fr 1fr',
+            gap: 64, alignItems: 'center',
+          }}>
             <div>
               <div className="section-label">Overview</div>
               <h2 className="section-title" style={{ fontSize: 'clamp(21px, 2.8vw, 29px)', lineHeight: 1.4 }}>
@@ -38,35 +45,42 @@ export default function VentilationType({ slug }) {
               ))}
             </div>
 
-            <div style={{
-              background: 'var(--light)', border: '1px solid var(--border)',
-              borderRadius: 16, padding: 32,
-            }}>
-              {/* The diagram explains the system faster than the paragraphs do,
-                  so it sits alongside them rather than further down the page. */}
-              {type.diagram && (
+            {hasSystems ? (
+              type.diagram && (
                 <img src={type.diagram.src} alt={type.diagram.alt}
-                  style={{ width: '100%', height: 'auto', marginBottom: 26 }} />
-              )}
-              <h3 style={{
-                fontSize: 13, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', marginBottom: 18,
-              }}>What we do</h3>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {type.offerings.map(o => (
-                  <li key={o} style={{ display: 'flex', gap: 10, fontSize: 15, lineHeight: 1.6 }}>
-                    <span aria-hidden="true">✓</span><span>{o}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  style={{ width: '100%', height: 'auto' }} />
+              )
+            ) : (
+              <div style={{
+                background: 'var(--light)', border: '1px solid var(--border)',
+                borderRadius: 16, padding: 32,
+              }}>
+                {/* The diagram explains the system faster than the paragraphs do,
+                    so it sits alongside them rather than further down the page. */}
+                {type.diagram && (
+                  <img src={type.diagram.src} alt={type.diagram.alt}
+                    style={{ width: '100%', height: 'auto', marginBottom: 26 }} />
+                )}
+                <h3 style={{
+                  fontSize: 13, fontWeight: 700, letterSpacing: '0.1em',
+                  textTransform: 'uppercase', marginBottom: 18,
+                }}>What we do</h3>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {type.offerings.map(o => (
+                    <li key={o} style={{ display: 'flex', gap: 10, fontSize: 15, lineHeight: 1.6 }}>
+                      <span aria-hidden="true">✓</span><span>{o}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* A page with named systems shows those instead of generic benefit
           cards — the systems say the same thing more concretely. */}
-      {type.systems === 'positive-pressure' ? (
+      {hasSystems ? (
         <SystemCards
           systems={positivePressureSystems}
           family="positive"
@@ -95,11 +109,15 @@ export default function VentilationType({ slug }) {
         </section>
       )}
 
-      <ImageGallery
-        images={type.images}
-        title={`${type.title} systems`}
-        intro="The systems we install, and how they're laid out in a house."
-      />
+      {/* The system cards above already show each system with its picture, so
+          the gallery would only repeat them. Kept for the pages without cards. */}
+      {!hasSystems && (
+        <ImageGallery
+          images={type.images}
+          title={`${type.title} systems`}
+          intro="The systems we install, and how they're laid out in a house."
+        />
+      )}
 
       {type.calculator && (
         <SmartVentCalculator family={type.calculator} typeTitle={type.title} />

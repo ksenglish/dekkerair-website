@@ -6,7 +6,7 @@ import { VENTILATION_ENDPOINT } from '../config'
 export default function useVentilationPricing(family) {
   const [rows, setRows] = useState(null) // null = loading, [] = unavailable
   const [pricingEnabled, setPricingEnabled] = useState(false)
-  const [installPerOutlet, setInstallPerOutlet] = useState(null)
+  const [installFrom, setInstallFrom] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -16,7 +16,7 @@ export default function useVentilationPricing(family) {
         if (cancelled) return
         setRows(data.systems || [])
         setPricingEnabled(!!data.pricingEnabled)
-        setInstallPerOutlet(data.installPerOutletIncGstCents ?? null)
+        setInstallFrom(data.installFromIncGstCents ?? null)
       })
       .catch(() => { if (!cancelled) setRows([]) })
     return () => { cancelled = true }
@@ -36,5 +36,5 @@ export default function useVentilationPricing(family) {
     return out
   }, [rows])
 
-  return { rows, pricingEnabled, installPerOutlet, fromBySystem }
+  return { rows, pricingEnabled, installFrom, fromBySystem }
 }

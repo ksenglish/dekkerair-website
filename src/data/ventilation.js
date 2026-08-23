@@ -11,6 +11,9 @@ export const ventilationTypes = [
     title: 'Positive Pressure',
     icon: '🌬️',
     calculator: 'positive',
+    // Having three named systems to choose between does the job the generic
+    // benefit cards were doing, so this page shows those instead.
+    systems: 'positive-pressure',
     diagram: { src: '/images/ventilation/positive-pressure-diagram.webp', alt: 'How a positive pressure system moves air through a house' },
     images: [
       { src: '/images/positive-pressure/lite-2-room.webp', caption: 'SmartVent Lite+ — two rooms' },

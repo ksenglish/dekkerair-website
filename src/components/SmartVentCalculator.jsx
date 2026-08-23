@@ -22,7 +22,10 @@ function Row({ children }) {
   )
 }
 
-export default function SmartVentCalculator({ family, typeTitle }) {
+// `defaultSystem` starts the calculator on a particular system — a system page
+// sets it. The dropdown still offers the rest, because the point of the
+// calculator is working out which one actually suits the house.
+export default function SmartVentCalculator({ family, typeTitle, defaultSystem = '' }) {
   const [rows, setRows] = useState(null) // null = loading, [] = unavailable
   const [pricingEnabled, setPricingEnabled] = useState(false)
   const [installPerOutlet, setInstallPerOutlet] = useState(null)
@@ -43,7 +46,12 @@ export default function SmartVentCalculator({ family, typeTitle }) {
 
   const [area, setArea] = useState('')
   const [outlets, setOutlets] = useState('')
-  const [system, setSystem] = useState('')
+  const [system, setSystem] = useState(defaultSystem)
+
+  // Moving between system pages keeps this component mounted, so the selection
+  // has to follow the new page rather than staying on whichever system was
+  // being looked at first.
+  useEffect(() => { setSystem(defaultSystem) }, [defaultSystem])
 
   const systems = useMemo(
     () => (rows ? [...new Set(rows.map(r => r.system))] : []),
@@ -152,6 +160,11 @@ export default function SmartVentCalculator({ family, typeTitle }) {
                 <select id="sv-system" style={{ ...field, cursor: 'pointer' }} value={system}
                   onChange={e => setSystem(e.target.value)}>
                   <option value="">Recommend one for me</option>
+                  {/* Systems come from the API, so a default that isn't in the
+                      list would silently select nothing — this keeps it shown. */}
+                  {defaultSystem && !systems.includes(defaultSystem) && (
+                    <option value={defaultSystem}>{defaultSystem}</option>
+                  )}
                   {systems.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
               </div>

@@ -4,6 +4,8 @@ import CTABand from '../components/CTABand'
 import ContactForm from '../components/ContactForm'
 import SmartVentCalculator from '../components/SmartVentCalculator'
 import ImageGallery from '../components/ImageGallery'
+import SystemCards from '../components/SystemCards'
+import { positivePressureSystems } from '../data/positivePressure'
 import { ventilationTypes, getVentilationType } from '../data/ventilation'
 import usePageMeta from '../hooks/usePageMeta'
 
@@ -62,26 +64,36 @@ export default function VentilationType({ slug }) {
         </div>
       </section>
 
-      <section style={{ padding: '80px 0', background: 'var(--light)' }}>
-        <div className="container">
-          <div className="section-label">Why it matters</div>
-          <h2 className="section-title">What you get from us</h2>
-          <div className="highlight-grid" style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: 24, marginTop: 36,
-          }}>
-            {type.highlights.map(h => (
-              <div key={h.title} style={{
-                background: 'white', border: '1px solid var(--border)',
-                borderRadius: 12, padding: 26,
-              }}>
-                <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>{h.title}</h3>
-                <p style={{ fontSize: 14.5, color: 'var(--muted)', lineHeight: 1.7 }}>{h.desc}</p>
-              </div>
-            ))}
+      {/* A page with named systems shows those instead of generic benefit
+          cards — the systems say the same thing more concretely. */}
+      {type.systems === 'positive-pressure' ? (
+        <SystemCards
+          systems={positivePressureSystems}
+          family="positive"
+          basePath="/ventilation/positive-pressure"
+        />
+      ) : (
+        <section style={{ padding: '80px 0', background: 'var(--light)' }}>
+          <div className="container">
+            <div className="section-label">Why it matters</div>
+            <h2 className="section-title">What you get from us</h2>
+            <div className="highlight-grid" style={{
+              display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: 24, marginTop: 36,
+            }}>
+              {type.highlights.map(h => (
+                <div key={h.title} style={{
+                  background: 'white', border: '1px solid var(--border)',
+                  borderRadius: 12, padding: 26,
+                }}>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>{h.title}</h3>
+                  <p style={{ fontSize: 14.5, color: 'var(--muted)', lineHeight: 1.7 }}>{h.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <ImageGallery
         images={type.images}

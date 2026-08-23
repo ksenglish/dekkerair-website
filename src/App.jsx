@@ -10,6 +10,8 @@ import NotFound from './pages/NotFound'
 import VentilationType from './pages/VentilationType'
 import { services } from './data/services'
 import { ventilationTypes } from './data/ventilation'
+import PositivePressureSystem from './pages/PositivePressureSystem'
+import { positivePressureSystems } from './data/positivePressure'
 import './index.css'
 
 export default function App() {
@@ -29,6 +31,13 @@ export default function App() {
           {/* Ventilation has a page per kind — see src/data/ventilation.js */}
           {ventilationTypes.map(v => (
             <Route key={v.slug} path={`/ventilation/${v.slug}`} element={<VentilationType slug={v.slug} />} />
+          ))}
+
+          {/* A page per positive pressure system, each starting the calculator on it.
+              Declared after the kinds above, but the paths are longer so they win. */}
+          {positivePressureSystems.map(s => (
+            <Route key={s.slug} path={`/ventilation/positive-pressure/${s.slug}`}
+              element={<PositivePressureSystem slug={s.slug} />} />
           ))}
 
           <Route path="/deals" element={<LatestDeals />} />

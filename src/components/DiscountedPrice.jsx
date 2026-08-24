@@ -5,9 +5,13 @@ import { nzd } from '../config'
 // The API sends the payable price already discounted, plus the price it was
 // before, so this only has to decide whether there's a saving worth showing —
 // there's no discount arithmetic on the site.
+// The saving as the customer sees it — the gap between the two figures on the
+// page, which are rounded up to whole dollars. Taking it from the raw cents
+// instead can print a saving a dollar out from the prices sitting beside it.
 export function saving(price, listPrice) {
   if (price == null || listPrice == null) return 0
-  return Math.max(0, listPrice - price)
+  const shownDollars = Math.ceil(listPrice / 100) - Math.ceil(price / 100)
+  return Math.max(0, shownDollars) * 100
 }
 
 export function DiscountBadge({ discount, price, listPrice, style }) {

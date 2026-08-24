@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { VENTILATION_ENDPOINT, LEAD_WEBHOOK, nzd } from '../config'
 import { systemImage } from '../data/systemImages'
+import DiscountedPrice, { saving } from './DiscountedPrice'
 
 // Sizes a SmartVent system from floor area and the number of outlets, using the
 // same bands the team uses on site — they come from Dekker App rather than a
@@ -29,6 +30,9 @@ function Row({ children }) {
 export default function SmartVentCalculator({ family, typeTitle, defaultSystem = '' }) {
   const [rows, setRows] = useState(null) // null = loading, [] = unavailable
   const [pricingEnabled, setPricingEnabled] = useState(false)
+  // Set when a discount is running on this family — the prices below already
+  // have it taken off.
+  const [discount, setDiscount] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -38,6 +42,7 @@ export default function SmartVentCalculator({ family, typeTitle, defaultSystem =
         if (cancelled) return
         setRows(data.systems || [])
         setPricingEnabled(!!data.pricingEnabled)
+        setDiscount(data.discount || null)
       })
       .catch(() => { if (!cancelled) setRows([]) })
     return () => { cancelled = true }
@@ -93,6 +98,13 @@ export default function SmartVentCalculator({ family, typeTitle, defaultSystem =
         match?.installedPriceIncGstCents != null
           ? `Installed inc GST: ${nzd(match.installedPriceIncGstCents)}`
           : 'Price: on request',
+        // Spelled out so whoever picks this up knows the customer has already
+        // been shown a reduced price, and what it was before.
+        saving(match?.installedPriceIncGstCents, match?.listPriceIncGstCents) > 0
+          ? `Discount applied: ${discount?.percent ? `${discount.percent}%` : nzd(saving(match.installedPriceIncGstCents, match.listPriceIncGstCents))}`
+            + `${discount?.label ? ` (${discount.label})` : ''}`
+            + ` — before discount ${nzd(match.listPriceIncGstCents)}`
+          : '',
         approximate ? 'NOTE: matched on outlet count only — floor area fell outside the charted bands.' : '',
         contact.notes ? `\nCustomer notes:\n${contact.notes}` : '',
         '\nSizing is the website estimate — confirm on site visit.',
@@ -228,11 +240,10 @@ export default function SmartVentCalculator({ family, typeTitle, defaultSystem =
                           fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
                           textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 6,
                         }}>Starting from</div>
-                        <div style={{ fontSize: 34, fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.02em' }}>
-                          {match.installedPriceIncGstCents != null
-                            ? nzd(match.installedPriceIncGstCents)
-                            : 'On request'}
-                        </div>
+                        <DiscountedPrice
+                          price={match.installedPriceIncGstCents}
+                          listPrice={match.listPriceIncGstCents}
+                          discount={discount} />
                         <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
                           Installed, inc GST
                         </div>

@@ -5,6 +5,7 @@ import CTABand from '../components/CTABand'
 import ContactForm from '../components/ContactForm'
 import HeatPumpCalculator from '../components/HeatPumpCalculator'
 import { ventilationTypes } from '../data/ventilation'
+import ImageGallery from '../components/ImageGallery'
 import { services, getService } from '../data/services'
 import usePageMeta from '../hooks/usePageMeta'
 
@@ -117,6 +118,8 @@ export default function ServicePage({ slug }) {
         </div>
       </section>
 
+      <ImageGallery images={service.images} title={`${service.title} we install`} />
+
       {service.calculator === 'heat-pump' && <HeatPumpCalculator />}
 
       {/* Ventilation splits into four kinds, each with its own page. */}
@@ -142,7 +145,18 @@ export default function ServicePage({ slug }) {
                 onMouseEnter={e => { e.currentTarget.style.borderColor = '#1a1a1a'; e.currentTarget.style.transform = 'translateY(-2px)' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none' }}
                 >
-                  <div style={{ fontSize: 32, marginBottom: 14 }}>{v.icon}</div>
+                  {/* The system diagram says more at a glance than an icon. */}
+                  {v.diagram ? (
+                    <div style={{
+                      background: 'var(--light)', borderRadius: 10, marginBottom: 16,
+                      height: 150, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      <img src={v.diagram.src} alt={v.diagram.alt} loading="lazy" decoding="async"
+                        style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 10 }} />
+                    </div>
+                  ) : (
+                    <div style={{ fontSize: 32, marginBottom: 14 }}>{v.icon}</div>
+                  )}
                   <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>{v.title}</h3>
                   <p style={{ fontSize: 14.5, color: 'var(--muted)', lineHeight: 1.7, flex: 1 }}>{v.summary}</p>
                   <span style={{

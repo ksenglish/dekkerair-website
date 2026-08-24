@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { VENTILATION_ENDPOINT, LEAD_WEBHOOK, nzd } from '../config'
+import { systemImage } from '../data/systemImages'
 
 // Sizes a SmartVent system from floor area and the number of outlets, using the
 // same bands the team uses on site — they come from Dekker App rather than a
@@ -22,10 +23,12 @@ function Row({ children }) {
   )
 }
 
-export default function SmartVentCalculator({ family, typeTitle }) {
+// `defaultSystem` starts the calculator on a particular system — a system page
+// sets it. The dropdown still offers the rest, because the point of the
+// calculator is working out which one actually suits the house.
+export default function SmartVentCalculator({ family, typeTitle, defaultSystem = '' }) {
   const [rows, setRows] = useState(null) // null = loading, [] = unavailable
   const [pricingEnabled, setPricingEnabled] = useState(false)
-  const [installPerOutlet, setInstallPerOutlet] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -35,7 +38,6 @@ export default function SmartVentCalculator({ family, typeTitle }) {
         if (cancelled) return
         setRows(data.systems || [])
         setPricingEnabled(!!data.pricingEnabled)
-        setInstallPerOutlet(data.installPerOutletIncGstCents ?? null)
       })
       .catch(() => { if (!cancelled) setRows([]) })
     return () => { cancelled = true }
@@ -43,7 +45,12 @@ export default function SmartVentCalculator({ family, typeTitle }) {
 
   const [area, setArea] = useState('')
   const [outlets, setOutlets] = useState('')
-  const [system, setSystem] = useState('')
+  const [system, setSystem] = useState(defaultSystem)
+
+  // Moving between system pages keeps this component mounted, so the selection
+  // has to follow the new page rather than staying on whichever system was
+  // being looked at first.
+  useEffect(() => { setSystem(defaultSystem) }, [defaultSystem])
 
   const systems = useMemo(
     () => (rows ? [...new Set(rows.map(r => r.system))] : []),
@@ -84,11 +91,8 @@ export default function SmartVentCalculator({ family, typeTitle }) {
         `Outlets wanted: ${outletCount}`,
         match ? `Suggested system: ${match.system} — ${match.model}` : 'No system matched',
         match?.installedPriceIncGstCents != null
-          ? `Supply only inc GST: ${nzd(match.installedPriceIncGstCents)}`
+          ? `Installed inc GST: ${nzd(match.installedPriceIncGstCents)}`
           : 'Price: on request',
-        installPerOutlet != null && outletCount > 0
-          ? `Installation from: ${nzd(installPerOutlet * outletCount)} (${nzd(installPerOutlet)} per outlet)`
-          : '',
         approximate ? 'NOTE: matched on outlet count only — floor area fell outside the charted bands.' : '',
         contact.notes ? `\nCustomer notes:\n${contact.notes}` : '',
         '\nSizing is the website estimate — confirm on site visit.',
@@ -152,6 +156,11 @@ export default function SmartVentCalculator({ family, typeTitle }) {
                 <select id="sv-system" style={{ ...field, cursor: 'pointer' }} value={system}
                   onChange={e => setSystem(e.target.value)}>
                   <option value="">Recommend one for me</option>
+                  {/* Systems come from the API, so a default that isn't in the
+                      list would silently select nothing — this keeps it shown. */}
+                  {defaultSystem && !systems.includes(defaultSystem) && (
+                    <option value={defaultSystem}>{defaultSystem}</option>
+                  )}
                   {systems.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
               </div>
@@ -198,36 +207,36 @@ export default function SmartVentCalculator({ family, typeTitle }) {
                       </Row>
                     </div>
 
-                    <div style={{
+                    <div className="rec-price" style={{
+                      display: 'flex', alignItems: 'center', gap: 22, flexWrap: 'wrap',
                       borderTop: '1px solid var(--border)', marginTop: 8, paddingTop: 22,
                     }}>
-                      <div style={{
-                        fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
-                        textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 6,
-                      }}>Starting from</div>
-                      <div style={{ fontSize: 34, fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.02em' }}>
-                        {match.installedPriceIncGstCents != null
-                          ? nzd(match.installedPriceIncGstCents)
-                          : 'On request'}
-                      </div>
-                      <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
-                        Supply Only, inc GST
-                      </div>
-
-                      {/* Installation is priced per outlet and confirmed on site,
-                          so it's shown as a "from" figure rather than folded in. */}
-                      {installPerOutlet != null && outletCount > 0 && (
-                        <div style={{
-                          marginTop: 16, paddingTop: 16, borderTop: '1px solid var(--border)',
-                          fontSize: 14, lineHeight: 1.7,
-                        }}>
-                          <strong>Installation from {nzd(installPerOutlet * outletCount)}</strong>
-                          <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 4 }}>
-                            {nzd(installPerOutlet)} per outlet × {outletCount}. Confirmed after a
-                            site visit — roof access and duct runs make the difference.
-                          </div>
-                        </div>
+                      {/* The system that's just been recommended, so it's clear
+                          what the price belongs to. */}
+                      {systemImage(match.system) && (
+                        <img
+                          src={systemImage(match.system)}
+                          alt={match.system}
+                          loading="lazy"
+                          decoding="async"
+                          style={{ width: 190, height: 'auto', flexShrink: 0 }}
+                        />
                       )}
+
+                      <div>
+                        <div style={{
+                          fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
+                          textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 6,
+                        }}>Starting from</div>
+                        <div style={{ fontSize: 34, fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.02em' }}>
+                          {match.installedPriceIncGstCents != null
+                            ? nzd(match.installedPriceIncGstCents)
+                            : 'On request'}
+                        </div>
+                        <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
+                          Installed, inc GST
+                        </div>
+                      </div>
                     </div>
 
                     {approximate && (

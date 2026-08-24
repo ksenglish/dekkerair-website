@@ -14,7 +14,7 @@ export default function PositivePressureSystem({ slug }) {
   const system = getPositivePressureSystem(slug)
   usePageMeta(system.title, system.metaDescription)
 
-  const { fromBySystem, installFrom } = useVentilationPricing('positive')
+  const { fromBySystem } = useVentilationPricing('positive')
   const from = fromBySystem[system.system]
   const others = positivePressureSystems.filter(s => s.slug !== slug)
 
@@ -64,10 +64,7 @@ export default function PositivePressureSystem({ slug }) {
                   {from != null ? `From ${nzd(from)}` : 'Price on request'}
                 </div>
                 <div style={{ fontSize: 13.5, color: 'var(--muted)', marginTop: 6, lineHeight: 1.7 }}>
-                  Supply only, inc GST.
-                  {installFrom != null
-                    ? ` Installation from ${nzd(installFrom)}, confirmed after a site visit.`
-                    : ' Installation quoted after a site visit.'}
+                  Installed, inc GST. The final price is confirmed after a site visit.
                 </div>
                 <a href="#calculator" className="btn btn-primary" style={{ marginTop: 20 }}>
                   Size it for my home

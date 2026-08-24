@@ -3,6 +3,11 @@ import { VENTILATION_ENDPOINT } from '../config'
 
 // The sizing bands and prices for a ventilation family, plus the cheapest model
 // under each system — the "from" figure the system cards quote.
+//
+// installFrom isn't shown anywhere at the moment: product prices still include
+// labour, so quoting it alongside them counted the install twice. It stays here
+// (and on the API) for when the labour-inclusive BOM kits are ready and prices
+// become supply-only.
 export default function useVentilationPricing(family) {
   const [rows, setRows] = useState(null) // null = loading, [] = unavailable
   const [pricingEnabled, setPricingEnabled] = useState(false)

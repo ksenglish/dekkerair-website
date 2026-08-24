@@ -7,7 +7,7 @@ import useVentilationPricing from '../hooks/useVentilationPricing'
 // system — a genuine "from", worked out from the price list rather than typed
 // in here.
 export default function SystemCards({ systems, family, basePath }) {
-  const { fromBySystem, installFrom } = useVentilationPricing(family)
+  const { fromBySystem } = useVentilationPricing(family)
 
   return (
     <section style={{ padding: '80px 0', background: 'var(--light)' }}>
@@ -61,8 +61,7 @@ export default function SystemCards({ systems, family, basePath }) {
                     {from != null ? `From ${nzd(from)}` : 'Price on request'}
                   </div>
                   <div style={{ fontSize: 13.5, color: 'var(--muted)', marginTop: 5 }}>
-                    Supply only, inc GST
-                    {installFrom != null && ` · installation from ${nzd(installFrom)}`}
+                    Installed, inc GST
                   </div>
                   <div style={{
                     marginTop: 18, fontSize: 13.5, fontWeight: 700,

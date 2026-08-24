@@ -29,7 +29,6 @@ function Row({ children }) {
 export default function SmartVentCalculator({ family, typeTitle, defaultSystem = '' }) {
   const [rows, setRows] = useState(null) // null = loading, [] = unavailable
   const [pricingEnabled, setPricingEnabled] = useState(false)
-  const [installFrom, setInstallFrom] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -39,7 +38,6 @@ export default function SmartVentCalculator({ family, typeTitle, defaultSystem =
         if (cancelled) return
         setRows(data.systems || [])
         setPricingEnabled(!!data.pricingEnabled)
-        setInstallFrom(data.installFromIncGstCents ?? null)
       })
       .catch(() => { if (!cancelled) setRows([]) })
     return () => { cancelled = true }
@@ -93,9 +91,8 @@ export default function SmartVentCalculator({ family, typeTitle, defaultSystem =
         `Outlets wanted: ${outletCount}`,
         match ? `Suggested system: ${match.system} — ${match.model}` : 'No system matched',
         match?.installedPriceIncGstCents != null
-          ? `Supply only inc GST: ${nzd(match.installedPriceIncGstCents)}`
+          ? `Installed inc GST: ${nzd(match.installedPriceIncGstCents)}`
           : 'Price: on request',
-        installFrom != null ? `Installation from: ${nzd(installFrom)}` : '',
         approximate ? 'NOTE: matched on outlet count only — floor area fell outside the charted bands.' : '',
         contact.notes ? `\nCustomer notes:\n${contact.notes}` : '',
         '\nSizing is the website estimate — confirm on site visit.',
@@ -237,20 +234,8 @@ export default function SmartVentCalculator({ family, typeTitle, defaultSystem =
                             : 'On request'}
                         </div>
                         <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
-                          Supply Only, inc GST
+                          Installed, inc GST
                         </div>
-
-                        {/* A single headline figure, not a rate multiplied by the
-                            outlet count — the real number is settled on site. */}
-                        {installFrom != null && (
-                          <div style={{ fontSize: 13.5, lineHeight: 1.7, marginTop: 12 }}>
-                            <strong>Installation from {nzd(installFrom)}</strong>
-                            <div style={{ color: 'var(--muted)' }}>
-                              Confirmed after a site visit — roof access and duct runs
-                              make the difference.
-                            </div>
-                          </div>
-                        )}
                       </div>
                     </div>
 

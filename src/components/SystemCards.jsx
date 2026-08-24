@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
 import { nzd } from '../config'
 import useVentilationPricing from '../hooks/useVentilationPricing'
+import { DiscountBadge, saving } from './DiscountedPrice'
 
 // The three systems side by side, each opening its own page with the
 // calculator already set to it. Prices are the cheapest model under each
 // system — a genuine "from", worked out from the price list rather than typed
 // in here.
 export default function SystemCards({ systems, family, basePath }) {
-  const { fromBySystem } = useVentilationPricing(family)
+  const { fromBySystem, listFromBySystem, discount } = useVentilationPricing(family)
 
   return (
     <section style={{ padding: '80px 0', background: 'var(--light)' }}>
@@ -17,6 +18,7 @@ export default function SystemCards({ systems, family, basePath }) {
         }}>
           {systems.map(s => {
             const from = fromBySystem[s.system]
+            const listFrom = listFromBySystem[s.system]
             return (
               <Link key={s.slug} to={`${basePath}/${s.slug}`} style={{
                 background: 'white', border: '1px solid var(--border)', borderRadius: 14,
@@ -57,8 +59,19 @@ export default function SystemCards({ systems, family, basePath }) {
                 </ul>
 
                 <div style={{ padding: '24px 30px 30px', borderTop: '1px solid var(--border)' }}>
-                  <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.01em' }}>
-                    {from != null ? `From ${nzd(from)}` : 'Price on request'}
+                  {saving(from, listFrom) > 0 && (
+                    <DiscountBadge discount={discount} price={from} listPrice={listFrom}
+                      style={{ marginBottom: 8 }} />
+                  )}
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 9, flexWrap: 'wrap' }}>
+                    <span style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.01em' }}>
+                      {from != null ? `From ${nzd(from)}` : 'Price on request'}
+                    </span>
+                    {saving(from, listFrom) > 0 && (
+                      <span style={{ fontSize: 16, color: 'var(--muted)', textDecoration: 'line-through' }}>
+                        {nzd(listFrom)}
+                      </span>
+                    )}
                   </div>
                   <div style={{ fontSize: 13.5, color: 'var(--muted)', marginTop: 5 }}>
                     Installed, inc GST

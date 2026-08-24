@@ -4,6 +4,7 @@ import CTABand from '../components/CTABand'
 import SmartVentCalculator from '../components/SmartVentCalculator'
 import { nzd } from '../config'
 import useVentilationPricing from '../hooks/useVentilationPricing'
+import { DiscountBadge, saving } from '../components/DiscountedPrice'
 import { positivePressureSystems, getPositivePressureSystem } from '../data/positivePressure'
 import usePageMeta from '../hooks/usePageMeta'
 
@@ -14,8 +15,9 @@ export default function PositivePressureSystem({ slug }) {
   const system = getPositivePressureSystem(slug)
   usePageMeta(system.title, system.metaDescription)
 
-  const { fromBySystem } = useVentilationPricing('positive')
+  const { fromBySystem, listFromBySystem, discount } = useVentilationPricing('positive')
   const from = fromBySystem[system.system]
+  const listFrom = listFromBySystem[system.system]
   const others = positivePressureSystems.filter(s => s.slug !== slug)
 
   return (
@@ -60,8 +62,19 @@ export default function PositivePressureSystem({ slug }) {
               <div style={{
                 marginTop: 30, paddingTop: 24, borderTop: '1px solid var(--border)',
               }}>
-                <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-0.02em' }}>
-                  {from != null ? `From ${nzd(from)}` : 'Price on request'}
+                {saving(from, listFrom) > 0 && (
+                  <DiscountBadge discount={discount} price={from} listPrice={listFrom}
+                    style={{ marginBottom: 9 }} />
+                )}
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-0.02em' }}>
+                    {from != null ? `From ${nzd(from)}` : 'Price on request'}
+                  </span>
+                  {saving(from, listFrom) > 0 && (
+                    <span style={{ fontSize: 17, color: 'var(--muted)', textDecoration: 'line-through' }}>
+                      {nzd(listFrom)}
+                    </span>
+                  )}
                 </div>
                 <div style={{ fontSize: 13.5, color: 'var(--muted)', marginTop: 6, lineHeight: 1.7 }}>
                   Installed, inc GST. The final price is confirmed after a site visit.

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { HEAT_PUMPS_ENDPOINT, LEAD_WEBHOOK, nzd } from '../config'
+import DiscountedPrice, { DiscountBadge, saving } from './DiscountedPrice'
 
 // Mirrors the Heat Pump Sizing calculator in Dekker App's Sales Presenter:
 // room volume x an insulation multiplier gives the required heating capacity,
@@ -40,6 +41,9 @@ export default function HeatPumpCalculator() {
   // ── price list ──────────────────────────────────────────────────────────────
   const [models, setModels] = useState(null) // null = loading, [] = unavailable
   const [pricingEnabled, setPricingEnabled] = useState(false)
+  // Set when a discount is running on this calculator — the prices below
+  // already have it taken off.
+  const [discount, setDiscount] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -49,6 +53,7 @@ export default function HeatPumpCalculator() {
         if (cancelled) return
         setModels(data.models || [])
         setPricingEnabled(!!data.pricingEnabled)
+        setDiscount(data.discount || null)
       })
       .catch(() => { if (!cancelled) setModels([]) })
     return () => { cancelled = true }
@@ -91,6 +96,7 @@ export default function HeatPumpCalculator() {
       model: match.model,
       description: match.description,
       priceCents: match.installedPriceIncGstCents,
+      listPriceCents: match.listPriceIncGstCents,
       qty: 1,
     }])
     setRoom(''); setLength(0); setWidth(0); setM2('0')
@@ -103,6 +109,11 @@ export default function HeatPumpCalculator() {
   const allPriced = basket.length > 0 && basket.every(i => i.priceCents != null)
   const totalCents = allPriced
     ? basket.reduce((sum, i) => sum + i.priceCents * i.qty, 0)
+    : null
+  // What the same list would have cost before the discount, for the struck-out
+  // figure beside the total.
+  const listTotalCents = allPriced
+    ? basket.reduce((sum, i) => sum + (i.listPriceCents ?? i.priceCents) * i.qty, 0)
     : null
 
   // ── enquiry submit ──────────────────────────────────────────────────────────
@@ -117,9 +128,21 @@ export default function HeatPumpCalculator() {
       `   ${i.priceCents != null ? `Installed inc GST: ${nzd(i.priceCents)}` : 'Price: on request'}`,
       `   Quantity: ${i.qty}`,
     ].join('\n'))
+
     if (totalCents != null) lines.push(`\nEstimated total (installed, inc GST): ${nzd(totalCents)}`)
+
+    // Spell the discount out, so whoever picks this up knows the customer has
+    // already been shown a reduced price and what it was before.
+    const off = saving(totalCents, listTotalCents)
+    if (off > 0) {
+      lines.push([
+        `Discount applied: ${discount?.percent ? `${discount.percent}%` : nzd(off)}`
+          + `${discount?.label ? ` (${discount.label})` : ''}`,
+        `Before discount: ${nzd(listTotalCents)} — saving ${nzd(off)}`,
+      ].join('\n'))
+    }
     return lines.join('\n\n')
-  }, [basket, totalCents])
+  }, [basket, totalCents, listTotalCents, discount])
 
   const submit = async (e) => {
     e.preventDefault()
@@ -281,11 +304,10 @@ export default function HeatPumpCalculator() {
                           fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
                           textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 6,
                         }}>Starting from</div>
-                        <div style={{ fontSize: 34, fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.02em' }}>
-                          {match.installedPriceIncGstCents != null
-                            ? nzd(match.installedPriceIncGstCents)
-                            : 'On request'}
-                        </div>
+                        <DiscountedPrice
+                          price={match.installedPriceIncGstCents}
+                          listPrice={match.listPriceIncGstCents}
+                          discount={discount} />
                         <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 6 }}>
                           Installed, inc GST
                         </div>
@@ -355,10 +377,19 @@ export default function HeatPumpCalculator() {
             }}>
               <span style={{ fontSize: 16, fontWeight: 600 }}>
                 Estimated total {totalCents != null && <span style={{ color: 'var(--muted)', fontWeight: 400, fontSize: 14 }}>(installed, inc GST)</span>}
+                <DiscountBadge discount={discount} price={totalCents} listPrice={listTotalCents}
+                  style={{ marginLeft: 10, verticalAlign: 'middle' }} />
               </span>
-              <strong style={{ fontSize: 26 }}>
-                {totalCents != null ? nzd(totalCents) : 'On request'}
-              </strong>
+              <span style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                {saving(totalCents, listTotalCents) > 0 && (
+                  <span style={{ fontSize: 15, color: 'var(--muted)', textDecoration: 'line-through' }}>
+                    {nzd(listTotalCents)}
+                  </span>
+                )}
+                <strong style={{ fontSize: 26 }}>
+                  {totalCents != null ? nzd(totalCents) : 'On request'}
+                </strong>
+              </span>
             </div>
 
             <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7, marginTop: 14 }}>

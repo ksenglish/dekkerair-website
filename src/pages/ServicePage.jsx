@@ -5,6 +5,7 @@ import CTABand from '../components/CTABand'
 import ContactForm from '../components/ContactForm'
 import HeatPumpCalculator from '../components/HeatPumpCalculator'
 import { ventilationTypes } from '../data/ventilation'
+import LossnayPromo from '../components/LossnayPromo'
 import ImageGallery from '../components/ImageGallery'
 import { services, getService } from '../data/services'
 import usePageMeta from '../hooks/usePageMeta'
@@ -176,6 +177,8 @@ export default function ServicePage({ slug }) {
           </div>
         </section>
       )}
+
+      {service.slug === 'ventilation' && <LossnayPromo background="var(--light)" />}
 
       {/* FAQ + enquiry form */}
       <section style={{ padding: '80px 0', background: 'white' }}>

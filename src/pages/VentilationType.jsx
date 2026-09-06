@@ -5,6 +5,7 @@ import ContactForm from '../components/ContactForm'
 import SmartVentCalculator from '../components/SmartVentCalculator'
 import ImageGallery from '../components/ImageGallery'
 import SystemCards from '../components/SystemCards'
+import LossnayPromo from '../components/LossnayPromo'
 import { positivePressureSystems } from '../data/positivePressure'
 import { ventilationTypes, getVentilationType } from '../data/ventilation'
 import usePageMeta from '../hooks/usePageMeta'
@@ -118,6 +119,10 @@ export default function VentilationType({ slug }) {
           intro="The systems we install, and how they're laid out in a house."
         />
       )}
+
+      {/* Lossnay is a balanced pressure system, so it belongs on that page
+          rather than being buried a level down. */}
+      {slug === 'balanced-pressure' && <LossnayPromo />}
 
       {type.calculator && (
         <SmartVentCalculator family={type.calculator} typeTitle={type.title} />

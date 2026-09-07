@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { lossnay } from '../data/lossnay'
+import useIsMobile from '../hooks/useIsMobile'
+import DemoFullScreen from './DemoFullScreen'
 
 // Mitsubishi Electric's own Lossnay Wi-Fi Control demo, embedded.
 //
@@ -22,8 +24,12 @@ const FEATURES = [
   'Check CO₂ levels where a sensor is fitted',
 ]
 
+const APP_TITLE = 'Mitsubishi Electric Lossnay Wi-Fi Control demonstration'
+
 export default function LossnayDemo() {
   const [tab, setTab] = useState('app')
+  const [fullScreen, setFullScreen] = useState(false)
+  const isMobile = useIsMobile()
   const { appUrl, videoId, videoTitle, sourceUrl } = lossnay.demo
 
   return (
@@ -101,7 +107,44 @@ export default function LossnayDemo() {
               })}
             </div>
 
-            {tab === 'app' ? (
+            {tab === 'app' ? (isMobile ? (
+              // On a phone the mock bezel was a picture of a phone inside a
+              // phone, and the app ended up smaller than the device it was
+              // built for. Here it opens over the whole screen instead, which
+              // is what Mitsubishi's own demo does when you tap it on a phone.
+              <div style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.14)',
+                borderRadius: 16, padding: 24, textAlign: 'center',
+              }}>
+                <div aria-hidden="true" style={{ fontSize: 34, lineHeight: 1 }}>📱</div>
+                <p style={{ fontSize: 15.5, fontWeight: 600, marginTop: 14 }}>
+                  Open the Lossnay app
+                </p>
+                <p style={{
+                  fontSize: 14, color: 'rgba(255,255,255,0.65)',
+                  lineHeight: 1.65, marginTop: 8,
+                }}>
+                  It takes over the screen, so you are using the real thing rather
+                  than looking at a picture of it. Close it to come back here.
+                </p>
+                <button type="button" onClick={() => setFullScreen(true)}
+                  style={{
+                    width: '100%', marginTop: 18, padding: '15px 20px',
+                    borderRadius: 10, background: 'white', color: '#1a1a1a',
+                    fontSize: 15.5, fontWeight: 700,
+                  }}>
+                  Try the app
+                </button>
+                <a href={appUrl} target="_blank" rel="noreferrer noopener"
+                  style={{
+                    display: 'inline-block', marginTop: 14, fontSize: 13.5,
+                    color: 'rgba(255,255,255,0.7)', textDecoration: 'underline',
+                  }}>
+                  Or open it in a new tab
+                </a>
+              </div>
+            ) : (
               <div style={{
                 // A phone-shaped frame, because that is the device the app is
                 // built for — given a wide box it lays itself out wrongly.
@@ -135,7 +178,7 @@ export default function LossnayDemo() {
 
                   <iframe
                     src={appUrl}
-                    title="Mitsubishi Electric Lossnay Wi-Fi Control demonstration"
+                    title={APP_TITLE}
                     loading="lazy"
                     style={{
                       position: 'relative', width: '100%', height: '100%',
@@ -144,7 +187,7 @@ export default function LossnayDemo() {
                   />
                 </div>
               </div>
-            ) : (
+            )) : (
               <div style={{
                 borderRadius: 14, overflow: 'hidden', background: '#000',
                 aspectRatio: '16 / 9', border: '1px solid rgba(255,255,255,0.16)',
@@ -166,12 +209,18 @@ export default function LossnayDemo() {
               textAlign: 'center', marginTop: 14, lineHeight: 1.6,
             }}>
               {tab === 'app'
-                ? 'Best on a phone-sized screen — it is a phone app.'
+                ? (isMobile
+                    ? 'Mitsubishi Electric’s live demonstration unit.'
+                    : 'Best on a phone-sized screen — it is a phone app.')
                 : videoTitle}
             </p>
           </div>
         </div>
       </div>
+
+      {fullScreen && (
+        <DemoFullScreen url={appUrl} title={APP_TITLE} onClose={() => setFullScreen(false)} />
+      )}
 
       <style>{`
         @media (max-width: 900px) {

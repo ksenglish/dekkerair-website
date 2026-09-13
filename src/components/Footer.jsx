@@ -53,7 +53,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 14 }}>
               <a href="tel:0800477123" style={dim} onMouseEnter={lighten} onMouseLeave={restore}>📞 0800 477 123</a>
               <a href="mailto:office@dekkergroup.co.nz" style={dim} onMouseEnter={lighten} onMouseLeave={restore}>✉️ office@dekkergroup.co.nz</a>
-              <span>🕐 Mon–Fri, 7.30am–5pm</span>
+              <span>🕐 Mon–Fri, 9am–5pm</span>
             </div>
           </div>
         </div>

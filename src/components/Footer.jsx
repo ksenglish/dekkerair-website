@@ -8,7 +8,7 @@ const restore = e => e.target.style.color = ''
 
 export default function Footer() {
   return (
-    <footer id="tmp-footer-check" style={{ background: '#1a1a1a', color: 'rgba(255,255,255,0.7)', padding: '48px 0 28px' }}>
+    <footer style={{ background: '#1a1a1a', color: 'rgba(255,255,255,0.7)', padding: '48px 0 28px' }}>
       <div className="container">
         <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 40 }}>
 

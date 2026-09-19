@@ -12,7 +12,9 @@ import usePageMeta from '../hooks/usePageMeta'
 
 export default function VentilationType({ slug }) {
   const type = getVentilationType(slug)
-  usePageMeta(`${type.title} Ventilation`, type.metaDescription)
+  // Some titles already say "Ventilation" (e.g. Balanced Pressure Ventilation),
+  // so don't double it up in the tab title.
+  usePageMeta(type.title.includes('Ventilation') ? type.title : `${type.title} Ventilation`, type.metaDescription)
 
   const others = ventilationTypes.filter(v => v.slug !== slug)
   const hasSystems = type.systems === 'positive-pressure'

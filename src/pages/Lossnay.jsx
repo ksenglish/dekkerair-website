@@ -155,7 +155,7 @@ export default function Lossnay() {
               border: '1px solid var(--border)', borderRadius: 12, padding: 24,
             }}>
               <div style={{ fontSize: 24, marginBottom: 10 }}>♻️</div>
-              <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>Balanced Pressure</h3>
+              <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>Balanced Pressure Ventilation</h3>
               <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>
                 The wider category Lossnay belongs to, including SmartVent systems.
               </p>

@@ -55,7 +55,7 @@ export default function ServicePage({ slug }) {
 
   return (
     <>
-      <PageHero label="Our Services" title={service.title} subtitle={service.tagline} />
+      <PageHero label="Our Services" title={service.title} subtitle={service.tagline} image={service.heroImage} />
 
       {/* Intro + what we do */}
       <section style={{ padding: '80px 0', background: 'white' }}>

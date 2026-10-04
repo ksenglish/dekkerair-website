@@ -110,6 +110,7 @@ export const services = [
     slug: 'ventilation',
     title: 'Ventilation',
     icon: '💨',
+    heroImage: '/images/ventilation/condensation-window.png',
     tagline: 'Deal with the damp, not just the symptoms.',
     summary: 'Fresh air ventilation systems that help reduce moisture, condensation and stale air while improving indoor air quality.',
     metaDescription: 'Home ventilation systems for Bay of Plenty homes. Dekker Air installs positive and balanced pressure ventilation to cut condensation, damp and mould.',

@@ -1,11 +1,11 @@
 // Banner at the top of every page except the home page. The generous top
 // padding clears the fixed 120px header.
-export default function PageHero({ label, title, subtitle }) {
+export default function PageHero({ label, title, subtitle, image = '/hero-bg.jpg' }) {
   return (
     <section style={{
       position: 'relative',
       padding: '184px 0 72px',
-      backgroundImage: 'url(/hero-bg.jpg)',
+      backgroundImage: `url(${image})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       overflow: 'hidden',

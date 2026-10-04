@@ -174,9 +174,9 @@ export default function ServicePage({ slug }) {
         </div>
       </section>
 
-      <ImageGallery images={service.images} title={`${service.title} we install`} />
-
       {service.calculator === 'heat-pump' && <HeatPumpCalculator />}
+
+      <ImageGallery images={service.images} title={`${service.title} we install`} />
 
       {service.slug === 'ventilation' && <LossnayPromo background="var(--light)" />}
 

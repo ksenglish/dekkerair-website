@@ -10,12 +10,12 @@ export const services = [
     // Renders the sizing calculator on this page — see ServicePage.jsx
     calculator: 'heat-pump',
     images: [
-      { src: '/images/heating/single-room.webp', caption: 'Single room high wall heat pump' },
+      { src: '/images/heating/single-room.webp', caption: 'Highwall heat pump' },
+      { src: '/images/heating/airetile-slim-lifestyle.jpg', caption: 'AireTile Slim Cassette Series', link: '/heating/airetile-slim-cassette-series' },
       { src: '/images/heating/whole-home-ducted.webp', caption: 'Whole home ducted heating' },
-      { src: '/images/heating/rinnai-pro-series-2.webp', caption: 'Rinnai Pro Series 2' },
       { src: '/images/heating/rinnai-hydraheat.webp', caption: 'Rinnai Hydraheat' },
       { src: '/images/heating/hot-water-heat-pump.webp', caption: 'Hot water heat pump' },
-      { src: '/images/heating/airetile-slim-lifestyle.jpg', caption: 'AireTile Slim Cassette Series', link: '/heating/airetile-slim-cassette-series' },
+      { src: '/images/heating/rinnai-pro-series-2.webp', caption: 'Rinnai Pro Series 2' },
     ],
     tagline: 'Warm, dry homes that cost less to run.',
     summary: 'Efficient heating solutions designed to keep your home warm, comfortable and energy efficient through every season.',

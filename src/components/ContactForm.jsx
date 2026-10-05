@@ -8,7 +8,7 @@ const serviceOptions = [...services.map(s => s.title), 'Not sure yet']
 // straight into Dekker App's lead intake.
 export default function ContactForm({ defaultService = '', source = 'Dekker Air-Website-Contact Form' }) {
   const [form, setForm] = useState({
-    name: '', email: '', phone: '', service: defaultService, message: '', website: '',
+    name: '', email: '', phone: '', address: '', service: defaultService, message: '', website: '',
   })
   const [status, setStatus] = useState(null) // null | 'sending' | 'sent' | 'error'
 
@@ -25,6 +25,7 @@ export default function ContactForm({ defaultService = '', source = 'Dekker Air-
           name: form.name,
           email: form.email,
           phone: form.phone,
+          address: form.address,
           service_required: form.service,
           message: form.message,
           source,
@@ -84,6 +85,12 @@ export default function ContactForm({ defaultService = '', source = 'Dekker Air-
         <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 5 }}>Email *</label>
         <input required type="email" style={inputStyle} placeholder="your@email.com" value={form.email}
           onChange={e => set('email', e.target.value)} onFocus={focus} onBlur={blur} />
+      </div>
+
+      <div>
+        <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 5 }}>Address</label>
+        <input style={inputStyle} placeholder="Your address" value={form.address}
+          onChange={e => set('address', e.target.value)} onFocus={focus} onBlur={blur} />
       </div>
 
       <div>

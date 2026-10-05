@@ -13,9 +13,13 @@ export const DEALS_ENDPOINT = `${API_BASE}/api/public/website/deals`
 export const resolveImage = (src) =>
   src && src.startsWith('/api/') ? `${API_BASE}${src}` : src
 
+// Whole dollars, rounded up. These are "from" figures a customer is sizing
+// against, not an invoice, so the cents are noise — and rounding up keeps the
+// quoted figure from ever landing under what the app worked out.
 export const nzd = (cents) =>
-  (cents / 100).toLocaleString('en-NZ', {
+  Math.ceil(cents / 100).toLocaleString('en-NZ', {
     style: 'currency',
     currency: 'NZD',
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   })

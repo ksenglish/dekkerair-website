@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-// A grid of product and system images, with a lightbox on click.
+// A grid of product and system images, with a lightbox on click. An image with
+// a `link` goes to its own product page instead of opening the lightbox.
 //
 // Everything here is a supplier render or diagram on a white background, so the
 // tiles use `contain` and a light backing rather than cropping — cutting the
@@ -22,27 +24,35 @@ export default function ImageGallery({ images, title = 'Systems we install', int
           gap: 20,
           marginTop: intro ? 0 : 36,
         }}>
-          {images.map(img => (
-            <button key={img.src} onClick={() => setOpen(img)} style={{
-              background: 'white', border: '1px solid var(--border)', borderRadius: 12,
-              overflow: 'hidden', padding: 0, textAlign: 'left', width: '100%',
-              cursor: 'zoom-in', fontFamily: 'inherit', transition: 'border-color 0.15s',
-            }}
-            onMouseEnter={e => e.currentTarget.style.borderColor = '#1a1a1a'}
-            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
-            >
-              <div style={{
-                background: 'var(--light)', height: 190,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <img src={img.src} alt={img.alt || img.caption || ''} loading="lazy" decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 14 }} />
-              </div>
-              {img.caption && (
-                <div style={{ padding: '13px 15px', fontSize: 14, lineHeight: 1.5 }}>{img.caption}</div>
-              )}
-            </button>
-          ))}
+          {images.map(img => {
+            const Tile = img.link ? Link : 'button'
+            const tileProps = img.link
+              ? { to: img.link }
+              : { onClick: () => setOpen(img) }
+
+            return (
+              <Tile key={img.src} {...tileProps} style={{
+                background: 'white', border: '1px solid var(--border)', borderRadius: 12,
+                overflow: 'hidden', padding: 0, textAlign: 'left', width: '100%',
+                display: 'block', cursor: img.link ? 'pointer' : 'zoom-in',
+                fontFamily: 'inherit', transition: 'border-color 0.15s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = '#1a1a1a'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+              >
+                <div style={{
+                  background: 'var(--light)', height: 190,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <img src={img.src} alt={img.alt || img.caption || ''} loading="lazy" decoding="async"
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 14 }} />
+                </div>
+                {img.caption && (
+                  <div style={{ padding: '13px 15px', fontSize: 14, lineHeight: 1.5 }}>{img.caption}</div>
+                )}
+              </Tile>
+            )
+          })}
         </div>
       </div>
 

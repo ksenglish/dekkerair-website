@@ -7,6 +7,48 @@
 
 export const ventilationTypes = [
   {
+    slug: 'balanced-pressure',
+    title: 'Balanced Pressure Ventilation',
+    icon: '♻️',
+    calculator: 'balanced',
+    diagram: { src: '/images/ventilation/balanced-pressure-diagram.webp', alt: 'Fresh air in, stale air out, through a heat exchanger' },
+    images: [
+      { src: '/images/balanced-pressure/synergy3-house.webp', caption: 'SmartVent Synergy 3 with heat recovery' },
+      { src: '/images/balanced-pressure/balance-house.webp', caption: 'SmartVent Balance' },
+      { src: '/images/balanced-pressure/balance-controller.webp', caption: 'Balance wall controller' },
+      { src: '/images/balanced-pressure/fresh-airflow.webp', caption: 'SmartVent Fresh airflow' },
+      { src: '/images/balanced-pressure/econiq-house.webp', caption: 'Vent-Axia Econiq heat recovery' },
+      { src: '/images/balanced-pressure/roof-cavity.webp', caption: 'The unit installed in the roof cavity' },
+    ],
+    tagline: 'Fresh air in, stale air out, keeping the warmth.',
+    summary: 'A balanced pressure system brings fresh air in while recovering the valuable energy already in your home.',
+    metaDescription: 'Balanced pressure ventilation with heat recovery for Bay of Plenty homes. SmartVent Synergy and Balance systems supplied and installed by Dekker Air.',
+    intro: [
+      'A balanced system does two things at once: it brings filtered air in from outside, and it takes stale air out of the wet rooms. Because both happen at a matched rate, the house doesn\'t end up pressurised in either direction.',
+      'The part that matters is what sits between them. The outgoing air passes a heat exchanger on its way out, and hands most of its warmth to the incoming air. You get the fresh air without throwing away the heating you\'ve already paid for.',
+    ],
+    offerings: [
+      'SmartVent Synergy 3 with heat recovery',
+      'SmartVent Balance for smaller homes',
+      'Ducting and diffusers laid out for your floor plan',
+      'Extraction from bathrooms, kitchen and laundry',
+      'Filter replacement and system servicing',
+    ],
+    highlights: [
+      { title: 'Keeps the heat', desc: 'The heat exchanger recovers warmth from the air on its way out, so ventilating doesn\'t undo your heating.' },
+      { title: 'Balanced by design', desc: 'Supply and extract are matched, so the house isn\'t pushed one way or the other — useful in a tightly built or newer home.' },
+      { title: 'Air from outside', desc: 'Fresh air is drawn from outside rather than the roof space, then filtered before it reaches the rooms.' },
+      { title: 'Extracts at the source', desc: 'Damp air is taken from the rooms that make it, rather than pushed around the house first.' },
+    ],
+    faqs: [
+      { q: 'How is this different from positive pressure?', a: 'Positive pressure pushes filtered roof-space air in and lets the damp air find its own way out. A balanced system also actively extracts, and passes the outgoing air through a heat exchanger to keep the warmth. It costs more and does more.' },
+      { q: 'Which one suits my house?', a: 'Newer, tighter homes tend to suit balanced systems; older, draughtier ones often do very well on positive pressure for a lot less money. It\'s worth a conversation rather than a rule.' },
+      { q: 'How big a house can it do?', a: 'The systems we install cover homes up to around 350 m². Larger or unusually laid out homes can still be done — it just needs designing rather than picking off a chart.' },
+      { q: 'Is it noisy?', a: 'The unit sits in the roof space and runs continuously at low speed. Ducting is sized so air moves slowly, which is what keeps it quiet at the diffuser.' },
+    ],
+  },
+
+  {
     slug: 'positive-pressure',
     title: 'Positive Pressure',
     icon: '🌬️',
@@ -49,48 +91,6 @@ export const ventilationTypes = [
       { q: 'Will it make the house cold?', a: 'The air comes from the roof space rather than straight from outside, and for much of the year that sits warmer than the outdoor air. Some systems can add heat to the incoming air. We\'ll talk through what your roof space actually does before you buy.' },
       { q: 'Does it replace opening the windows?', a: 'It does the job on the days you can\'t — winter, rain, or when the house is empty. Opening windows still helps, but a ventilation system keeps working when nobody\'s there to open them.' },
       { q: 'What maintenance does it need?', a: 'Filters need replacing periodically, and the unit benefits from a check-over. We can do it as part of a service visit or supply filters for you to change yourself.' },
-    ],
-  },
-
-  {
-    slug: 'balanced-pressure',
-    title: 'Balanced Pressure',
-    icon: '♻️',
-    calculator: 'balanced',
-    diagram: { src: '/images/ventilation/balanced-pressure-diagram.webp', alt: 'Fresh air in, stale air out, through a heat exchanger' },
-    images: [
-      { src: '/images/balanced-pressure/synergy3-house.webp', caption: 'SmartVent Synergy 3 with heat recovery' },
-      { src: '/images/balanced-pressure/balance-house.webp', caption: 'SmartVent Balance' },
-      { src: '/images/balanced-pressure/balance-controller.webp', caption: 'Balance wall controller' },
-      { src: '/images/balanced-pressure/fresh-airflow.webp', caption: 'SmartVent Fresh airflow' },
-      { src: '/images/balanced-pressure/econiq-house.webp', caption: 'Vent-Axia Econiq heat recovery' },
-      { src: '/images/balanced-pressure/roof-cavity.webp', caption: 'The unit installed in the roof cavity' },
-    ],
-    tagline: 'Fresh air in, stale air out, keeping the warmth.',
-    summary: 'A balanced pressure system brings fresh air in while recovering the valuable energy already in your home.',
-    metaDescription: 'Balanced pressure ventilation with heat recovery for Bay of Plenty homes. SmartVent Synergy and Balance systems supplied and installed by Dekker Air.',
-    intro: [
-      'A balanced system does two things at once: it brings filtered air in from outside, and it takes stale air out of the wet rooms. Because both happen at a matched rate, the house doesn\'t end up pressurised in either direction.',
-      'The part that matters is what sits between them. The outgoing air passes a heat exchanger on its way out, and hands most of its warmth to the incoming air. You get the fresh air without throwing away the heating you\'ve already paid for.',
-    ],
-    offerings: [
-      'SmartVent Synergy 3 with heat recovery',
-      'SmartVent Balance for smaller homes',
-      'Ducting and diffusers laid out for your floor plan',
-      'Extraction from bathrooms, kitchen and laundry',
-      'Filter replacement and system servicing',
-    ],
-    highlights: [
-      { title: 'Keeps the heat', desc: 'The heat exchanger recovers warmth from the air on its way out, so ventilating doesn\'t undo your heating.' },
-      { title: 'Balanced by design', desc: 'Supply and extract are matched, so the house isn\'t pushed one way or the other — useful in a tightly built or newer home.' },
-      { title: 'Air from outside', desc: 'Fresh air is drawn from outside rather than the roof space, then filtered before it reaches the rooms.' },
-      { title: 'Extracts at the source', desc: 'Damp air is taken from the rooms that make it, rather than pushed around the house first.' },
-    ],
-    faqs: [
-      { q: 'How is this different from positive pressure?', a: 'Positive pressure pushes filtered roof-space air in and lets the damp air find its own way out. A balanced system also actively extracts, and passes the outgoing air through a heat exchanger to keep the warmth. It costs more and does more.' },
-      { q: 'Which one suits my house?', a: 'Newer, tighter homes tend to suit balanced systems; older, draughtier ones often do very well on positive pressure for a lot less money. It\'s worth a conversation rather than a rule.' },
-      { q: 'How big a house can it do?', a: 'The systems we install cover homes up to around 350 m². Larger or unusually laid out homes can still be done — it just needs designing rather than picking off a chart.' },
-      { q: 'Is it noisy?', a: 'The unit sits in the roof space and runs continuously at low speed. Ducting is sized so air moves slowly, which is what keeps it quiet at the diffuser.' },
     ],
   },
 

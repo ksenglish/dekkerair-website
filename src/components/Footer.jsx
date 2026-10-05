@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '/dekkerair-logo.jpg'
+import logo from '/dekkerair-logo-footer.webp'
 import { services } from '../data/services'
 
 const dim = { fontSize: 14, transition: 'color 0.2s' }

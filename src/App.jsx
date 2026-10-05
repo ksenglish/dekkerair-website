@@ -12,6 +12,8 @@ import { services } from './data/services'
 import { ventilationTypes } from './data/ventilation'
 import PositivePressureSystem from './pages/PositivePressureSystem'
 import { positivePressureSystems } from './data/positivePressure'
+import Lossnay from './pages/Lossnay'
+import AireTile from './pages/AireTile'
 import './index.css'
 
 export default function App() {
@@ -32,6 +34,13 @@ export default function App() {
           {ventilationTypes.map(v => (
             <Route key={v.slug} path={`/ventilation/${v.slug}`} element={<VentilationType slug={v.slug} />} />
           ))}
+
+          {/* A branded product rather than a kind of ventilation, so it has its
+              own page rather than a row in ventilation.js. */}
+          <Route path="/ventilation/lossnay" element={<Lossnay />} />
+
+          {/* Same idea for heating — a branded product with its own page. */}
+          <Route path="/heating/airetile-slim-cassette-series" element={<AireTile />} />
 
           {/* A page per positive pressure system, each starting the calculator on it.
               Declared after the kinds above, but the paths are longer so they win. */}

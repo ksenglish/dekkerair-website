@@ -5,6 +5,7 @@ import CTABand from '../components/CTABand'
 import ContactForm from '../components/ContactForm'
 import HeatPumpCalculator from '../components/HeatPumpCalculator'
 import { ventilationTypes } from '../data/ventilation'
+import LossnayPromo from '../components/LossnayPromo'
 import ImageGallery from '../components/ImageGallery'
 import { services, getService } from '../data/services'
 import usePageMeta from '../hooks/usePageMeta'
@@ -54,7 +55,7 @@ export default function ServicePage({ slug }) {
 
   return (
     <>
-      <PageHero label="Our Services" title={service.title} subtitle={service.tagline} />
+      <PageHero label="Our Services" title={service.title} subtitle={service.tagline} image={service.heroImage} />
 
       {/* Intro + what we do */}
       <section style={{ padding: '80px 0', background: 'white' }}>
@@ -95,33 +96,6 @@ export default function ServicePage({ slug }) {
         </div>
       </section>
 
-      {/* Highlights */}
-      <section style={{ padding: '80px 0', background: 'var(--light)' }}>
-        <div className="container">
-          <div className="section-label">Why it matters</div>
-          <h2 className="section-title" style={{ marginBottom: 40 }}>What you get from us</h2>
-
-          <div className="quad-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
-            {service.highlights.map(h => (
-              <div key={h.title} style={{
-                background: 'white',
-                border: '1px solid var(--border)',
-                borderRadius: 12,
-                padding: 26,
-                boxShadow: 'var(--shadow)',
-              }}>
-                <h4 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10 }}>{h.title}</h4>
-                <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7 }}>{h.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ImageGallery images={service.images} title={`${service.title} we install`} />
-
-      {service.calculator === 'heat-pump' && <HeatPumpCalculator />}
-
       {/* Ventilation splits into four kinds, each with its own page. */}
       {service.slug === 'ventilation' && (
         <section style={{ padding: '80px 0', background: 'var(--light)', borderTop: '1px solid var(--border)' }}>
@@ -152,7 +126,7 @@ export default function ServicePage({ slug }) {
                       height: 150, display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}>
                       <img src={v.diagram.src} alt={v.diagram.alt} loading="lazy" decoding="async"
-                        style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 10 }} />
+                        style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 4 }} />
                     </div>
                   ) : (
                     <div style={{ fontSize: 32, marginBottom: 14 }}>{v.icon}</div>
@@ -176,6 +150,35 @@ export default function ServicePage({ slug }) {
           </div>
         </section>
       )}
+
+      {/* Highlights */}
+      <section style={{ padding: '80px 0', background: 'var(--light)' }}>
+        <div className="container">
+          <div className="section-label">Why it matters</div>
+          <h2 className="section-title" style={{ marginBottom: 40 }}>What you get from us</h2>
+
+          <div className="quad-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+            {service.highlights.map(h => (
+              <div key={h.title} style={{
+                background: 'white',
+                border: '1px solid var(--border)',
+                borderRadius: 12,
+                padding: 26,
+                boxShadow: 'var(--shadow)',
+              }}>
+                <h4 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10 }}>{h.title}</h4>
+                <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7 }}>{h.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {service.calculator === 'heat-pump' && <HeatPumpCalculator />}
+
+      <ImageGallery images={service.images} title={`${service.title} we install`} />
+
+      {service.slug === 'ventilation' && <LossnayPromo background="var(--light)" />}
 
       {/* FAQ + enquiry form */}
       <section style={{ padding: '80px 0', background: 'white' }}>

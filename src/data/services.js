@@ -60,6 +60,7 @@ export const services = [
 
   {
     slug: 'cooling',
+    heroImage: '/images/cooling/hero-water.png',
     images: [
       { src: '/images/cooling/multi-split.webp', caption: 'Multi-split air conditioning' },
       { src: '/images/cooling/rinnai-ducted.webp', caption: 'Ducted air conditioning' },

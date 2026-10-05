@@ -14,7 +14,7 @@ export default function PageHero({ label, labelImage, title, subtitle, image = '
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {labelImage ? (
-          <img src={labelImage} alt={label} style={{ height: 59, marginTop: 10, marginBottom: 16, marginLeft: -10 }} />
+          <img src={labelImage} alt={label} style={{ height: 59, marginTop: 10, marginBottom: 18, marginLeft: -10 }} />
         ) : label && (
           <div style={{
             fontSize: 13, fontWeight: 700, letterSpacing: '0.14em',

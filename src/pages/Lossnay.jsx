@@ -15,7 +15,7 @@ export default function Lossnay() {
 
   return (
     <>
-      <PageHero label={lossnay.brand} title={lossnay.title} subtitle={lossnay.tagline} />
+      <PageHero label={lossnay.brand} title={lossnay.title} subtitle={lossnay.tagline} image={lossnay.heroImage} />
 
       <section style={{ padding: '80px 0', background: 'white' }}>
         <div className="container">

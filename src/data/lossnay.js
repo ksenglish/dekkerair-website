@@ -14,6 +14,7 @@ export const lossnay = {
   tagline: 'Fresh air in, without throwing your heating out with it.',
   metaDescription:
     'Mitsubishi Electric Lossnay heat recovery ventilation, supplied and installed across the Bay of Plenty by Dekker Air. Try the Lossnay Wi-Fi Control app demo.',
+  heroImage: '/images/lossnay/wifi-control-lifestyle.jpg',
 
   intro: [
     'Every house needs air changed. The problem is what the old air takes with it — in winter, the warmth you have just paid to put into it, and in summer the cool.',

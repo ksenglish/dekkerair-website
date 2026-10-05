@@ -17,7 +17,7 @@ export default function Lossnay() {
     <>
       <PageHero
         label={lossnay.brand}
-        labelImage="/images/lossnay/mitsubishi-electric-logo-white.jpg"
+        labelImage="/images/lossnay/mitsubishi-electric-logo-white.png"
         title={lossnay.title}
         subtitle={lossnay.tagline}
         image={lossnay.heroImage}

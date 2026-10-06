@@ -14,6 +14,7 @@ export default function AireTile() {
     <>
       <PageHero
         label={airetile.brand}
+        labelImage="/images/lossnay/mitsubishi-electric-logo-white.png"
         title={airetile.title}
         subtitle={airetile.tagline}
         image={airetile.heroImage}

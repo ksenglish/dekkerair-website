@@ -9,7 +9,7 @@ export const airetile = {
   tagline: 'Free up your walls for the things you love.',
   metaDescription:
     'Mitsubishi Electric AireTile Slim MLZ Cassette heat pump, supplied and installed across the Bay of Plenty by Dekker Air. A ceiling-mounted alternative to a high-wall unit.',
-  heroImage: '/images/heating/airetile-slim-lifestyle.jpg',
+  heroImage: '/images/heating/airetile-mlz-kitchen-lifestyle.jpg',
 
   intro: [
     'The Mitsubishi Electric AireTile Slim Cassette Heat Pump Series delivers the comfort and performance of a traditional wall-mounted heat pump without taking up valuable wall space.',

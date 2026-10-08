@@ -18,6 +18,7 @@ export default function ApSeries() {
         title={apSeries.title}
         subtitle={apSeries.tagline}
         image={apSeries.heroImage}
+        imagePosition="top"
       />
 
       <section style={{ padding: '80px 0', background: 'white' }}>

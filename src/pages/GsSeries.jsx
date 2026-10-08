@@ -18,6 +18,7 @@ export default function GsSeries() {
         title={gsSeries.title}
         subtitle={gsSeries.tagline}
         image={gsSeries.heroImage}
+        imagePosition="top"
       />
 
       <section style={{ padding: '80px 0', background: 'white' }}>

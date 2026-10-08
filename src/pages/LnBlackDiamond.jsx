@@ -19,6 +19,7 @@ export default function LnBlackDiamond() {
         title={lnBlackDiamond.title}
         subtitle={lnBlackDiamond.tagline}
         image={lnBlackDiamond.heroImage}
+        imagePosition="top"
       />
 
       <section style={{ padding: '80px 0', background: 'white' }}>

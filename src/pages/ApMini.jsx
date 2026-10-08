@@ -18,6 +18,7 @@ export default function ApMini() {
         title={apMini.title}
         subtitle={apMini.tagline}
         image={apMini.heroImage}
+        imagePosition="top"
       />
 
       <section style={{ padding: '80px 0', background: 'white' }}>

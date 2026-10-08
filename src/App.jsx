@@ -17,6 +17,7 @@ import AireTile from './pages/AireTile'
 import Highwall from './pages/Highwall'
 import ApSeries from './pages/ApSeries'
 import ApMini from './pages/ApMini'
+import GsSeries from './pages/GsSeries'
 import './index.css'
 
 export default function App() {
@@ -47,6 +48,7 @@ export default function App() {
           <Route path="/heating/highwall-heat-pumps" element={<Highwall />} />
           <Route path="/heating/ap-series" element={<ApSeries />} />
           <Route path="/heating/ap-mini" element={<ApMini />} />
+          <Route path="/heating/gs-series" element={<GsSeries />} />
 
           {/* A page per positive pressure system, each starting the calculator on it.
               Declared after the kinds above, but the paths are longer so they win. */}

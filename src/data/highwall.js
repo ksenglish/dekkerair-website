@@ -24,7 +24,7 @@ export const highwall = {
         { src: '/images/heating/highwall-ap-series-lifestyle.jpg', caption: 'AP Series', link: '/heating/ap-series' },
         { src: '/images/heating/highwall-ap-mini-lifestyle.jpeg', caption: 'AP Mini', link: '/heating/ap-mini' },
         { src: '/images/heating/highwall-ef-designer-smart-lifestyle.jpg', caption: 'EF Designer Smart Series' },
-        { src: '/images/heating/highwall-gs-series-lifestyle.jpg', caption: 'GS Series' },
+        { src: '/images/heating/highwall-gs-series-lifestyle.jpg', caption: 'GS Series', link: '/heating/gs-series' },
         { src: '/images/heating/highwall-ln-black-diamond-lifestyle.jpg', caption: 'LN Black Diamond Series' },
       ],
     },

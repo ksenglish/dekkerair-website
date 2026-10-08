@@ -5,7 +5,11 @@
 // then slides to the next, rather than one still banner (used on the
 // Highwall page). The track repeats the list twice and animates to -50% so
 // the loop is seamless; the keyframes are generated per image count since
-// each slide needs its own hold.
+// each slide needs its own hold. Each photo also fades in as it slides into
+// frame and fades out as it slides clear, rather than cutting straight from
+// one to the next — the fade is given its own per-slide keyframes (reusing
+// the same hold/transition timing) since opacity has to animate on the
+// individual slide, not the track.
 const HOLD_SECONDS = 4.5
 const TRANSITION_SECONDS = 1.5
 
@@ -13,16 +17,41 @@ function heroSlideKeyframes(count) {
   const segmentSeconds = HOLD_SECONDS + TRANSITION_SECONDS
   const totalSeconds = count * segmentSeconds
   const posAt = i => -((i / (2 * count)) * 100)
-  const frames = []
+  const bounds = i => ({
+    segStart: (i * segmentSeconds / totalSeconds) * 100,
+    holdEnd: ((i * segmentSeconds + HOLD_SECONDS) / totalSeconds) * 100,
+    segEnd: ((i + 1) * segmentSeconds / totalSeconds) * 100,
+  })
+
+  const slideFrames = []
   for (let i = 0; i < count; i++) {
-    const segStart = (i * segmentSeconds / totalSeconds) * 100
-    const holdEnd = ((i * segmentSeconds + HOLD_SECONDS) / totalSeconds) * 100
-    const segEnd = ((i + 1) * segmentSeconds / totalSeconds) * 100
-    frames.push(`${segStart}% { transform: translateX(${posAt(i)}%); }`)
-    frames.push(`${holdEnd}% { transform: translateX(${posAt(i)}%); }`)
-    frames.push(`${segEnd}% { transform: translateX(${posAt(i + 1)}%); }`)
+    const { segStart, holdEnd, segEnd } = bounds(i)
+    slideFrames.push(`${segStart}% { transform: translateX(${posAt(i)}%); }`)
+    slideFrames.push(`${holdEnd}% { transform: translateX(${posAt(i)}%); }`)
+    slideFrames.push(`${segEnd}% { transform: translateX(${posAt(i + 1)}%); }`)
   }
-  return { name: `hero-slide-${count}`, css: `@keyframes hero-slide-${count} { ${frames.join(' ')} }`, totalSeconds }
+
+  const fadeRules = []
+  if (count < 2) {
+    fadeRules.push(`@keyframes hero-fade-${count}-0 { 0% { opacity: 1; } 100% { opacity: 1; } }`)
+  } else {
+    for (let i = 0; i < count; i++) {
+      const { holdEnd: fadeInStart, segEnd: fadeInEnd } = bounds((i - 1 + count) % count)
+      const { holdEnd: fadeOutStart, segEnd: fadeOutEnd } = bounds(i)
+      const points = i === 0
+        ? [[0, 1], [fadeOutStart, 1], [fadeOutEnd, 0], [fadeInStart, 0], [fadeInEnd, 1]]
+        : [[0, 0], [fadeInStart, 0], [fadeInEnd, 1], [fadeOutStart, 1], [fadeOutEnd, 0], [100, 0]]
+      const frames = points.map(([p, o]) => `${p}% { opacity: ${o}; }`).join(' ')
+      fadeRules.push(`@keyframes hero-fade-${count}-${i} { ${frames} }`)
+    }
+  }
+
+  return {
+    name: `hero-slide-${count}`,
+    fadeName: i => `hero-fade-${count}-${i}`,
+    css: `@keyframes hero-slide-${count} { ${slideFrames.join(' ')} } ${fadeRules.join(' ')}`,
+    totalSeconds,
+  }
 }
 
 export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center' }) {
@@ -44,7 +73,11 @@ export default function PageHero({ label, labelImage, title, subtitle, image = '
           <style>{slideshow.css}</style>
           <div className="hero-slider-track" style={{ animationName: slideshow.name, animationDuration: `${slideshow.totalSeconds}s` }}>
             {[...images, ...images].map((src, i) => (
-              <div key={i} className="hero-slider-slide" style={{ backgroundImage: `url(${src})` }} />
+              <div key={i} className="hero-slider-slide" style={{
+                backgroundImage: `url(${src})`,
+                animationName: slideshow.fadeName(i % images.length),
+                animationDuration: `${slideshow.totalSeconds}s`,
+              }} />
             ))}
           </div>
         </>

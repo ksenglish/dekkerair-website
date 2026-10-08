@@ -50,7 +50,7 @@ export default function Highwall() {
           <section key={brand.name} style={{ padding: '0 0 80px', background: 'white' }}>
             <div className="container">
               {brand.logo ? (
-                <img src={brand.logo} alt={brand.name} style={{ height: 36, marginBottom: 18 }} />
+                <img src={brand.logo} alt={brand.name} style={{ height: 36, marginBottom: 8 }} />
               ) : (
                 <div className="section-label">Have a look</div>
               )}

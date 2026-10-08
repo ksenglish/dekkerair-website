@@ -16,6 +16,7 @@ export const services = [
       { src: '/images/heating/rinnai-hydraheat.webp', caption: 'Rinnai Hydraheat' },
       { src: '/images/heating/hot-water-heat-pump.webp', caption: 'Hot water heat pump' },
       { src: '/images/heating/rinnai-pro-series-2.webp', caption: 'Rinnai Pro Series 2' },
+      { src: '/images/heating/kw-rapidheat-smart-series.png', caption: 'KW RapidHeat Smart Series' },
     ],
     tagline: 'Warm, dry homes that cost less to run.',
     summary: 'Efficient heating solutions designed to keep your home warm, comfortable and energy efficient through every season.',

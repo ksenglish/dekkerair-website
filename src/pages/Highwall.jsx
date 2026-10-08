@@ -18,6 +18,7 @@ export default function Highwall() {
         title={highwall.title}
         subtitle={highwall.tagline}
         image={highwall.heroImage}
+        images={highwall.heroImages}
       />
 
       <section style={{ padding: '80px 0 24px', background: 'white' }}>

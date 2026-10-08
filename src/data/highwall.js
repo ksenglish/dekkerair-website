@@ -9,6 +9,13 @@ export const highwall = {
   metaDescription:
     'Highwall heat pumps supplied and installed across the Bay of Plenty by Dekker Air, from Mitsubishi Electric and Rinnai.',
   heroImage: '/images/heating/highwall-ap-series-lifestyle.jpg',
+  heroImages: [
+    '/images/heating/highwall-ap-series-lifestyle.jpg',
+    '/images/heating/highwall-ap-mini-lifestyle.jpeg',
+    '/images/heating/highwall-ef-designer-smart-lifestyle.jpg',
+    '/images/heating/highwall-gs-series-lifestyle.jpg',
+    '/images/heating/highwall-ln-black-diamond-lifestyle.jpg',
+  ],
 
   intro: [
     'A high-wall heat pump is still the simplest way to heat a room, and between the brands we install there is a model for almost every room and budget — from a compact unit for a single bedroom through to a design-led piece for an open-plan living area.',

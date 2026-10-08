@@ -1,15 +1,29 @@
 // Banner at the top of every page except the home page. The generous top
 // padding clears the fixed 120px header.
-export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', imagePosition = 'center' }) {
+//
+// Pass `images` instead of `image` to slide slowly through several photos
+// rather than show one still banner (used on the Highwall page). The track
+// repeats the list twice and animates to -50% so the loop is seamless.
+export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center' }) {
   return (
     <section style={{
       position: 'relative',
       padding: '184px 0 72px',
-      backgroundImage: `url(${image})`,
-      backgroundSize: 'cover',
-      backgroundPosition: imagePosition,
+      ...(images && images.length > 0 ? {} : {
+        backgroundImage: `url(${image})`,
+        backgroundSize: 'cover',
+        backgroundPosition: imagePosition,
+      }),
       overflow: 'hidden',
     }}>
+      {images && images.length > 0 && (
+        <div className="hero-slider-track" style={{ animationDuration: `${images.length * 12}s` }}>
+          {[...images, ...images].map((src, i) => (
+            <div key={i} className="hero-slider-slide" style={{ backgroundImage: `url(${src})` }} />
+          ))}
+        </div>
+      )}
+
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)' }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>

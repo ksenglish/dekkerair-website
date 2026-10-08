@@ -49,7 +49,11 @@ export default function Highwall() {
         ) : (
           <section key={brand.name} style={{ padding: '0 0 80px', background: 'white' }}>
             <div className="container">
-              <div className="section-label">Have a look</div>
+              {brand.logo ? (
+                <img src={brand.logo} alt={brand.name} style={{ height: 36, marginBottom: 18 }} />
+              ) : (
+                <div className="section-label">Have a look</div>
+              )}
               <h2 className="section-title">{brand.name}</h2>
               <p className="section-subtitle">{brand.intro}</p>
             </div>

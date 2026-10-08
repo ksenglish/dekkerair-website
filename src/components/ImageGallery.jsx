@@ -15,7 +15,7 @@ export default function ImageGallery({ images, title = 'Systems we install', int
     <section style={{ padding: '80px 0', background: 'white' }}>
       <div className="container">
         {logo ? (
-          <img src={logo} alt={title} style={{ height: 36, marginBottom: 18 }} />
+          <img src={logo} alt={title} style={{ height: 44, marginBottom: 18 }} />
         ) : (
           <div className="section-label">Have a look</div>
         )}

@@ -30,6 +30,7 @@ export const highwall = {
     },
     {
       name: 'Rinnai',
+      logo: '/images/heating/rinnai-logo.webp',
       intro: 'Photos of the Rinnai high-wall range are on the way.',
       images: [],
     },

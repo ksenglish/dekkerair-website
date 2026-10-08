@@ -29,6 +29,12 @@ export const lnBlackDiamond = {
 
   optionalUpgrades: [],
 
+  colours: [
+    { name: 'Onyx Black', image: '/images/heating/ln-black-diamond-onyx-black.jpg' },
+    { name: 'Ruby Red', image: '/images/heating/ln-black-diamond-ruby-red.jpg' },
+    { name: 'Pearl White', image: '/images/heating/ln-black-diamond-pearl-white.jpg' },
+  ],
+
   footnotes: [
     'LN 25/35 indoor sound level on the lowest fan setting.',
   ],

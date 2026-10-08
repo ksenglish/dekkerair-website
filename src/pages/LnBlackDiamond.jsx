@@ -93,6 +93,24 @@ export default function LnBlackDiamond() {
       </section>
 
       <section style={{ padding: '0 0 80px', background: 'white' }}>
+        <div className="container">
+          <div className="section-label">Colour options</div>
+          <h2 className="section-title" style={{ marginBottom: 28 }}>Available in three finishes</h2>
+          <div className="tri-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+            {lnBlackDiamond.colours.map(c => (
+              <div key={c.name} style={{
+                background: 'var(--light)', border: '1px solid var(--border)',
+                borderRadius: 12, padding: 24, textAlign: 'center',
+              }}>
+                <img src={c.image} alt={`LN Black Diamond Smart Series in ${c.name}`} style={{ width: '100%', height: 'auto' }} />
+                <h3 style={{ fontSize: 15, fontWeight: 700, marginTop: 16 }}>{c.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section style={{ padding: '0 0 80px', background: 'white' }}>
         <div className="container" style={{ maxWidth: 560 }}>
           <div style={{
             background: 'var(--light)', border: '1px solid var(--border)',
@@ -116,6 +134,7 @@ export default function LnBlackDiamond() {
       <style>{`
         @media (max-width: 900px) {
           .split-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .tri-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </>

@@ -10,12 +10,11 @@ export const services = [
     // Renders the sizing calculator on this page — see ServicePage.jsx
     calculator: 'heat-pump',
     images: [
-      { src: '/images/heating/highwall-ef-silver.jpg', caption: 'Highwall Heat Pump' },
+      { src: '/images/heating/highwall-ef-silver.jpg', caption: 'Highwall Heat Pumps' },
       { src: '/images/heating/airetile-slim-lifestyle.jpg', caption: 'AireTile Slim Cassette Series', link: '/heating/airetile-slim-cassette-series' },
       { src: '/images/heating/whole-home-ducted.webp', caption: 'Whole home ducted heating' },
       { src: '/images/heating/rinnai-hydraheat.webp', caption: 'Rinnai Hydraheat' },
       { src: '/images/heating/hot-water-heat-pump.webp', caption: 'Hot water heat pump' },
-      { src: '/images/heating/rinnai-pro-series-2.webp', caption: 'Rinnai Pro Series 2' },
       { src: '/images/heating/kw-rapidheat-smart-series.png', caption: 'KW RapidHeat Smart Series' },
     ],
     tagline: 'Warm, dry homes that cost less to run.',

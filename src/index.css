@@ -74,16 +74,13 @@ button { cursor: pointer; font-family: inherit; border: none; }
   display: flex;
   width: fit-content;
   height: 100%;
-  animation: hero-slide linear infinite;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 .hero-slider-slide {
   flex: 0 0 auto;
   width: 100vw;
   height: 100%;
   background-size: cover;
-  background-position: center;
-}
-@keyframes hero-slide {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  background-position: top;
 }

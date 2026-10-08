@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 // Everything here is a supplier render or diagram on a white background, so the
 // tiles use `contain` and a light backing rather than cropping — cutting the
 // edges off a labelled diagram would lose the labels.
-export default function ImageGallery({ images, title = 'Systems we install', intro, logo }) {
+export default function ImageGallery({ images, title = 'Systems we install', intro, logo, captionStyle }) {
   const [open, setOpen] = useState(null)
   if (!images?.length) return null
 
@@ -52,7 +52,7 @@ export default function ImageGallery({ images, title = 'Systems we install', int
                     style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 14 }} />
                 </div>
                 {img.caption && (
-                  <div style={{ padding: '13px 15px', fontSize: 14, lineHeight: 1.5 }}>{img.caption}</div>
+                  <div style={{ padding: '13px 15px', fontSize: 14, lineHeight: 1.5, ...captionStyle }}>{img.caption}</div>
                 )}
               </Tile>
             )

@@ -45,6 +45,7 @@ export default function Highwall() {
             title={brand.name}
             intro={brand.intro}
             logo={brand.logo}
+            captionStyle={{ textAlign: 'center', fontWeight: 600 }}
           />
         ) : (
           <section key={brand.name} style={{ padding: '0 0 80px', background: 'white' }}>

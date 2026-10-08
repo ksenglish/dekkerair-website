@@ -30,9 +30,9 @@ export const lnBlackDiamond = {
   optionalUpgrades: [],
 
   colours: [
-    { name: 'Onyx Black', image: '/images/heating/ln-black-diamond-onyx-black.jpg' },
-    { name: 'Ruby Red', image: '/images/heating/ln-black-diamond-ruby-red.jpg' },
-    { name: 'Pearl White', image: '/images/heating/ln-black-diamond-pearl-white.jpg' },
+    { name: 'Black Diamond', image: '/images/heating/ln-black-diamond-onyx-black.jpg' },
+    { name: 'Red Diamond', image: '/images/heating/ln-black-diamond-ruby-red.jpg' },
+    { name: 'White Diamond', image: '/images/heating/ln-black-diamond-pearl-white.jpg' },
   ],
 
   footnotes: [

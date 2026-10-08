@@ -12,7 +12,7 @@ export const highwall = {
   heroImages: [
     '/images/heating/highwall-ap-series-lifestyle.jpg',
     '/images/heating/highwall-ap-mini-lifestyle.jpeg',
-    '/images/heating/highwall-ef-designer-smart-lifestyle.jpg',
+    { src: '/images/heating/highwall-ef-designer-smart-lifestyle.jpg', position: 'center' },
     '/images/heating/highwall-gs-series-lifestyle.jpg',
     '/images/heating/highwall-ln-black-diamond-lifestyle.jpg',
   ],

@@ -3,7 +3,9 @@
 //
 // Pass `images` instead of `image` for a slideshow that holds on each photo
 // then slides to the next, rather than one still banner (used on the
-// Highwall page). The track repeats the list twice and animates to -50% so
+// Highwall page). Each entry can be a plain image path, or an
+// { src, position } object to override the shared top crop for that one
+// photo. The track repeats the list twice and animates to -50% so
 // the loop is seamless; the keyframes are generated per image count since
 // each slide needs its own hold. Each photo also fades in as it slides into
 // frame and fades out as it slides clear, rather than cutting straight from
@@ -72,13 +74,18 @@ export default function PageHero({ label, labelImage, title, subtitle, image = '
         <>
           <style>{slideshow.css}</style>
           <div className="hero-slider-track" style={{ animationName: slideshow.name, animationDuration: `${slideshow.totalSeconds}s` }}>
-            {[...images, ...images].map((src, i) => (
-              <div key={i} className="hero-slider-slide" style={{
-                backgroundImage: `url(${src})`,
-                animationName: slideshow.fadeName(i % images.length),
-                animationDuration: `${slideshow.totalSeconds}s`,
-              }} />
-            ))}
+            {[...images, ...images].map((img, i) => {
+              const src = typeof img === 'string' ? img : img.src
+              const position = typeof img === 'string' ? undefined : img.position
+              return (
+                <div key={i} className="hero-slider-slide" style={{
+                  backgroundImage: `url(${src})`,
+                  ...(position ? { backgroundPosition: position } : {}),
+                  animationName: slideshow.fadeName(i % images.length),
+                  animationDuration: `${slideshow.totalSeconds}s`,
+                }} />
+              )
+            })}
           </div>
         </>
       )}

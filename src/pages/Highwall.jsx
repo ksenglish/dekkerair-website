@@ -6,16 +6,15 @@ import ImageGallery from '../components/ImageGallery'
 import { highwall } from '../data/highwall'
 import usePageMeta from '../hooks/usePageMeta'
 
-// Mitsubishi Electric high-wall range. Sits under /heating because that is
-// what a customer is shopping for — see the same reasoning on AireTile.jsx.
+// High-wall heat pumps across the brands we install. Sits under /heating
+// because that is what a customer is shopping for — see the same reasoning on
+// AireTile.jsx.
 export default function Highwall() {
   usePageMeta(highwall.title, highwall.metaDescription)
 
   return (
     <>
       <PageHero
-        label={highwall.brand}
-        labelImage="/images/lossnay/mitsubishi-electric-logo-white.png"
         title={highwall.title}
         subtitle={highwall.tagline}
         image={highwall.heroImage}
@@ -38,11 +37,24 @@ export default function Highwall() {
         </div>
       </section>
 
-      <ImageGallery
-        images={highwall.images}
-        title="The range"
-        intro="Which series suits depends on the room and the look you're after. We'll size it and tell you what's included before you commit."
-      />
+      {highwall.brands.map(brand => (
+        brand.images.length > 0 ? (
+          <ImageGallery
+            key={brand.name}
+            images={brand.images}
+            title={brand.name}
+            intro={brand.intro}
+          />
+        ) : (
+          <section key={brand.name} style={{ padding: '0 0 80px', background: 'white' }}>
+            <div className="container">
+              <div className="section-label">Have a look</div>
+              <h2 className="section-title">{brand.name}</h2>
+              <p className="section-subtitle">{brand.intro}</p>
+            </div>
+          </section>
+        )
+      ))}
 
       <section style={{ padding: '0 0 80px', background: 'white' }}>
         <div className="container" style={{ maxWidth: 560 }}>

@@ -18,6 +18,7 @@ export const highwall = {
   brands: [
     {
       name: 'Mitsubishi Electric',
+      logo: '/images/heating/mitsubishi-electric-logo.jpg',
       intro: 'Every model draws on the same reliable platform underneath; what changes between series is the finish, the sound level and the features.',
       images: [
         { src: '/images/heating/highwall-ap-series-lifestyle.jpg', caption: 'AP Series' },

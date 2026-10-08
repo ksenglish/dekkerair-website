@@ -20,7 +20,7 @@ export default function Highwall() {
         image={highwall.heroImage}
       />
 
-      <section style={{ padding: '80px 0', background: 'white' }}>
+      <section style={{ padding: '80px 0 24px', background: 'white' }}>
         <div className="container">
           <nav style={{ fontSize: 14, color: 'var(--muted)', marginBottom: 32 }}>
             <Link to="/heating" style={{ color: 'var(--muted)' }}>Heating</Link>
@@ -44,6 +44,7 @@ export default function Highwall() {
             images={brand.images}
             title={brand.name}
             intro={brand.intro}
+            logo={brand.logo}
           />
         ) : (
           <section key={brand.name} style={{ padding: '0 0 80px', background: 'white' }}>

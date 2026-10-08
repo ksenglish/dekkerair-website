@@ -15,6 +15,7 @@ import { positivePressureSystems } from './data/positivePressure'
 import Lossnay from './pages/Lossnay'
 import AireTile from './pages/AireTile'
 import Highwall from './pages/Highwall'
+import ApSeries from './pages/ApSeries'
 import './index.css'
 
 export default function App() {
@@ -43,6 +44,7 @@ export default function App() {
           {/* Same idea for heating — a branded product with its own page. */}
           <Route path="/heating/airetile-slim-cassette-series" element={<AireTile />} />
           <Route path="/heating/highwall-heat-pumps" element={<Highwall />} />
+          <Route path="/heating/ap-series" element={<ApSeries />} />
 
           {/* A page per positive pressure system, each starting the calculator on it.
               Declared after the kinds above, but the paths are longer so they win. */}

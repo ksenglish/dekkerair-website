@@ -17,6 +17,7 @@ import AireTile from './pages/AireTile'
 import Highwall from './pages/Highwall'
 import ApSeries from './pages/ApSeries'
 import ApMini from './pages/ApMini'
+import EfDesignerSmart from './pages/EfDesignerSmart'
 import GsSeries from './pages/GsSeries'
 import LnBlackDiamond from './pages/LnBlackDiamond'
 import './index.css'
@@ -49,6 +50,7 @@ export default function App() {
           <Route path="/heating/highwall-heat-pumps" element={<Highwall />} />
           <Route path="/heating/ap-series" element={<ApSeries />} />
           <Route path="/heating/ap-mini" element={<ApMini />} />
+          <Route path="/heating/ef-designer-smart" element={<EfDesignerSmart />} />
           <Route path="/heating/gs-series" element={<GsSeries />} />
           <Route path="/heating/ln-black-diamond" element={<LnBlackDiamond />} />
 

@@ -15,6 +15,7 @@ export const highwall = {
     '/images/heating/highwall-ef-designer-smart-lifestyle.jpg',
     '/images/heating/highwall-gs-series-lifestyle.jpg',
     '/images/heating/highwall-ln-black-diamond-lifestyle.jpg',
+    '/images/heating/highwall-rinnai-pro-series-2-lifestyle.jpg',
   ],
 
   intro: [
@@ -38,8 +39,10 @@ export const highwall = {
     {
       name: 'Rinnai',
       logo: '/images/heating/rinnai-logo.webp',
-      intro: 'Photos of the Rinnai high-wall range are on the way.',
-      images: [],
+      intro: 'The Pro Series 2 brings Wi-Fi app control, geolocation and energy monitoring to a heat pump built for New Zealand conditions.',
+      images: [
+        { src: '/images/heating/highwall-rinnai-pro-series-2-lifestyle.jpg', caption: 'Pro Series 2', link: '/heating/rinnai-pro-series-2' },
+      ],
     },
   ],
 }

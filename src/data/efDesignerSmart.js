@@ -29,5 +29,11 @@ export const efDesignerSmart = {
 
   optionalUpgrades: [],
 
+  colours: [
+    { name: 'Pure White', image: '/images/heating/ef-designer-smart-pure-white.png' },
+    { name: 'Matte Silver', image: '/images/heating/ef-designer-smart-matte-silver.png' },
+    { name: 'Rich Black Diamond', image: '/images/heating/ef-designer-smart-rich-black-diamond.png' },
+  ],
+
   footnotes: [],
 }

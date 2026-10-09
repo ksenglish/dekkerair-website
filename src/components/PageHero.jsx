@@ -3,7 +3,9 @@
 //
 // Pass `images` instead of `image` for a slideshow that holds on each photo
 // then slides to the next, rather than one still banner (used on the
-// Highwall page). Each entry can be a plain image path, or an
+// Highwall page). `paddingBottom` can be raised on pages with no label/logo
+// above the title, whose banner would otherwise sit shorter than the
+// single-brand pages. Each entry can be a plain image path, or an
 // { src, position } object to override the shared top crop for that one
 // photo. The track repeats the list twice and animates to -50% so
 // the loop is seamless; the keyframes are generated per image count since
@@ -56,13 +58,13 @@ function heroSlideKeyframes(count) {
   }
 }
 
-export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center' }) {
+export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center', paddingBottom = 72 }) {
   const slideshow = images && images.length > 0 ? heroSlideKeyframes(images.length) : null
 
   return (
     <section style={{
       position: 'relative',
-      padding: '184px 0 72px',
+      padding: `184px 0 ${paddingBottom}px`,
       ...(slideshow ? {} : {
         backgroundImage: `url(${image})`,
         backgroundSize: 'cover',

@@ -58,7 +58,7 @@ function heroSlideKeyframes(count) {
   }
 }
 
-export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center', paddingBottom = 72 }) {
+export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center', paddingBottom = 72, align = 'center' }) {
   const slideshow = images && images.length > 0 ? heroSlideKeyframes(images.length) : null
 
   return (
@@ -94,9 +94,11 @@ export default function PageHero({ label, labelImage, title, subtitle, image = '
 
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)' }} />
 
-      <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: align }}>
         {labelImage ? (
-          <img src={labelImage} alt={label} style={{ height: 59, margin: '10px auto 18px' }} />
+          <img src={labelImage} alt={label} style={align === 'left'
+            ? { height: 59, marginTop: 10, marginBottom: 18, marginLeft: -4 }
+            : { height: 59, margin: '10px auto 18px' }} />
         ) : label && (
           <div style={{
             fontSize: 13, fontWeight: 700, letterSpacing: '0.14em',
@@ -117,8 +119,7 @@ export default function PageHero({ label, labelImage, title, subtitle, image = '
         {subtitle && (
           <p style={{
             marginTop: 18,
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            ...(align === 'left' ? {} : { marginLeft: 'auto', marginRight: 'auto' }),
             fontSize: 18,
             color: 'rgba(255,255,255,0.85)',
             maxWidth: 620,

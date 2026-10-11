@@ -14,6 +14,7 @@ export default function RinnaiProSeries2() {
     <>
       <PageHero
         label={rinnaiProSeries2.brand}
+        labelImage="/images/heating/rinnai-logo.webp"
         title={rinnaiProSeries2.title}
         subtitle={rinnaiProSeries2.tagline}
         image={rinnaiProSeries2.heroImage}

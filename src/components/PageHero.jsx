@@ -58,7 +58,7 @@ function heroSlideKeyframes(count) {
   }
 }
 
-export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center', paddingBottom = 72, align = 'center' }) {
+export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center', paddingBottom = 72, align = 'left' }) {
   const slideshow = images && images.length > 0 ? heroSlideKeyframes(images.length) : null
 
   return (

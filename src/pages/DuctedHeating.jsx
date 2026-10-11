@@ -37,6 +37,33 @@ export default function DuctedHeating() {
         </div>
       </section>
 
+      <section style={{ padding: '0 0 80px', background: 'white' }}>
+        <div className="container">
+          <div className="section-label">Why choose ducted</div>
+          <h2 className="section-title">Ducted vs. high-wall heat pumps</h2>
+          <p className="section-subtitle">
+            High-wall split systems are great for heating or cooling a single room. A ducted system changes how the whole home feels.
+          </p>
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: 24, marginTop: 36,
+          }}>
+            {ductedHeating.highlights.map(h => (
+              <div key={h.title} style={{
+                background: 'var(--light)', border: '1px solid var(--border)',
+                borderRadius: 12, padding: 26,
+              }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>{h.title}</h3>
+                <p style={{ fontSize: 14.5, color: 'var(--muted)', lineHeight: 1.7 }}>{h.desc}</p>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 16, color: 'var(--muted)', lineHeight: 1.8, marginTop: 36, maxWidth: 720 }}>
+            {ductedHeating.pairing}
+          </p>
+        </div>
+      </section>
+
       {ductedHeating.brands.map(brand => (
         brand.images.length > 0 ? (
           <ImageGallery

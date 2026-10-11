@@ -82,7 +82,7 @@ export default function DuctedHeating() {
         </div>
       </section>
 
-      {ductedHeating.brands.map(brand => (
+      {ductedHeating.brands.map((brand, i) => (
         brand.images.length > 0 ? (
           <ImageGallery
             key={brand.name}
@@ -91,6 +91,7 @@ export default function DuctedHeating() {
             intro={brand.intro}
             logo={brand.logo}
             captionStyle={{ textAlign: 'center', fontWeight: 600 }}
+            style={i > 0 ? { paddingTop: 24 } : undefined}
           />
         ) : (
           <section key={brand.name} style={{ padding: '0 0 80px', background: 'white' }}>

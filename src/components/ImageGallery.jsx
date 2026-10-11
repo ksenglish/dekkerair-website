@@ -7,12 +7,12 @@ import { Link } from 'react-router-dom'
 // Everything here is a supplier render or diagram on a white background, so the
 // tiles use `contain` and a light backing rather than cropping — cutting the
 // edges off a labelled diagram would lose the labels.
-export default function ImageGallery({ images, title = 'Systems we install', intro, logo, captionStyle }) {
+export default function ImageGallery({ images, title = 'Systems we install', intro, logo, captionStyle, style }) {
   const [open, setOpen] = useState(null)
   if (!images?.length) return null
 
   return (
-    <section style={{ padding: '80px 0', background: 'white' }}>
+    <section style={{ padding: '80px 0', background: 'white', ...style }}>
       <div className="container">
         {logo ? (
           <img src={logo} alt={title} style={{ height: 44, marginBottom: 18 }} />

@@ -1,5 +1,7 @@
 // Banner at the top of every page except the home page. The generous top
-// padding clears the fixed 120px header.
+// padding clears the fixed 120px header; `paddingTop` can be raised further
+// on a given page to add visible breathing room above the heading, since
+// the header sits on top of that padding and hides the first 120px of it.
 //
 // Pass `images` instead of `image` for a slideshow that holds on each photo
 // then slides to the next, rather than one still banner (used on the
@@ -58,13 +60,13 @@ function heroSlideKeyframes(count) {
   }
 }
 
-export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center', paddingBottom = 72, align = 'left' }) {
+export default function PageHero({ label, labelImage, title, subtitle, image = '/hero-bg.jpg', images, imagePosition = 'center', paddingTop = 184, paddingBottom = 72, align = 'left' }) {
   const slideshow = images && images.length > 0 ? heroSlideKeyframes(images.length) : null
 
   return (
     <section style={{
       position: 'relative',
-      padding: `184px 0 ${paddingBottom}px`,
+      padding: `${paddingTop}px 0 ${paddingBottom}px`,
       ...(slideshow ? {} : {
         backgroundImage: `url(${image})`,
         backgroundSize: 'cover',

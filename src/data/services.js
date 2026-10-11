@@ -12,7 +12,7 @@ export const services = [
     images: [
       { src: '/images/heating/highwall-ef-silver.jpg', caption: 'Highwall Heat Pumps', link: '/heating/highwall-heat-pumps' },
       { src: '/images/heating/airetile-slim-lifestyle.jpg', caption: 'AireTile Slim Cassette Series', link: '/heating/airetile-slim-cassette-series' },
-      { src: '/images/heating/whole-home-ducted.webp', caption: 'Whole home ducted heating' },
+      { src: '/images/heating/whole-home-ducted.jpg', caption: 'Whole home ducted heating', link: '/heating/ducted-heating' },
       { src: '/images/heating/rinnai-hydraheat.webp', caption: 'Rinnai Hydraheat' },
       { src: '/images/heating/hot-water-heat-pump.webp', caption: 'Hot water heat pump' },
       { src: '/images/heating/kw-rapidheat-smart-series.png', caption: 'KW RapidHeat Smart Series' },

@@ -15,6 +15,7 @@ import { positivePressureSystems } from './data/positivePressure'
 import Lossnay from './pages/Lossnay'
 import AireTile from './pages/AireTile'
 import Highwall from './pages/Highwall'
+import DuctedHeating from './pages/DuctedHeating'
 import ApSeries from './pages/ApSeries'
 import ApMini from './pages/ApMini'
 import EfDesignerSmart from './pages/EfDesignerSmart'
@@ -49,6 +50,7 @@ export default function App() {
           {/* Same idea for heating — a branded product with its own page. */}
           <Route path="/heating/airetile-slim-cassette-series" element={<AireTile />} />
           <Route path="/heating/highwall-heat-pumps" element={<Highwall />} />
+          <Route path="/heating/ducted-heating" element={<DuctedHeating />} />
           <Route path="/heating/ap-series" element={<ApSeries />} />
           <Route path="/heating/ap-mini" element={<ApMini />} />
           <Route path="/heating/ef-designer-smart" element={<EfDesignerSmart />} />

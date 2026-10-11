@@ -43,8 +43,8 @@ export default function DuctedHeating() {
           <p className="section-subtitle">
             While high-wall split systems are great for heating or cooling individual spaces, a ducted system transforms how your entire home feels.
           </p>
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          <div className="quad-grid" style={{
+            display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
             gap: 24, marginTop: 36,
           }}>
             {ductedHeating.highlights.map(h => (

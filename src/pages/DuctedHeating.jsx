@@ -73,12 +73,22 @@ export default function DuctedHeating() {
 
       <section style={{ padding: '0 0 80px', background: 'white' }}>
         <div className="container">
-          <h2 className="section-title">{ductedHeating.installation.title}</h2>
-          {ductedHeating.installation.paragraphs.map((p, i) => (
-            <p key={i} style={{ fontSize: 16, color: 'var(--muted)', lineHeight: 1.8, marginTop: i === 0 ? 16 : 18, maxWidth: 720 }}>
-              {p}
-            </p>
-          ))}
+          <div className="split-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, alignItems: 'center' }}>
+            <div>
+              <h2 className="section-title">{ductedHeating.installation.title}</h2>
+              {ductedHeating.installation.paragraphs.map((p, i) => (
+                <p key={i} style={{ fontSize: 16, color: 'var(--muted)', lineHeight: 1.8, marginTop: i === 0 ? 16 : 18 }}>
+                  {p}
+                </p>
+              ))}
+            </div>
+            <div style={{
+              background: 'var(--light)', border: '1px solid var(--border)', borderRadius: 16,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 28,
+            }}>
+              <img src={ductedHeating.installation.image} alt="Cutaway diagram of a ducted heat pump system installed in a roof cavity" style={{ width: '100%', height: 'auto' }} />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -127,6 +137,12 @@ export default function DuctedHeating() {
       </section>
 
       <CTABand />
+
+      <style>{`
+        @media (max-width: 900px) {
+          .split-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+        }
+      `}</style>
     </>
   )
 }

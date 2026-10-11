@@ -50,6 +50,7 @@ export const ductedHeating = {
 
   installation: {
     title: 'Expert Design & Professional Installation',
+    image: '/images/heating/ducted-system-diagram.jpg',
     paragraphs: [
       'Getting the most out of a ducted heat pump system requires precise sizing, smart layout planning, and quality craftsmanship.',
       "Our team of experienced HVAC professionals brings deep product knowledge and hands-on installation expertise to every project. We work closely with you to assess your home's layout, design a custom ducting plan tailored to your lifestyle, and execute a flawless installation to ensure maximum efficiency, quiet operation, and long-term reliability.",

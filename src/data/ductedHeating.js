@@ -63,7 +63,9 @@ export const ductedHeating = {
       name: 'Mitsubishi Electric',
       logo: '/images/heating/mitsubishi-electric-logo.jpg',
       intro: "Mitsubishi Electric's ducted range runs a single outdoor unit through ceiling ductwork, with zoning so different areas of the home can be heated independently.",
-      images: [],
+      images: [
+        { src: '/images/heating/mitsubishi-ducted-lifestyle.jpg', caption: 'Mitsubishi Electric Whole-Home Ducted Heating & Cooling' },
+      ],
     },
     {
       name: 'Rinnai',

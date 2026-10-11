@@ -39,7 +39,6 @@ export default function DuctedHeating() {
 
       <section style={{ padding: '0 0 80px', background: 'white' }}>
         <div className="container">
-          <div className="section-label">Why choose ducted</div>
           <h2 className="section-title">Why Choose Ducted Over High-Wall Heat Pumps?</h2>
           <p className="section-subtitle">
             While high-wall split systems are great for heating or cooling individual spaces, a ducted system transforms how your entire home feels.

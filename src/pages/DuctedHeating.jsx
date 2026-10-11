@@ -25,7 +25,7 @@ export default function DuctedHeating() {
           <nav style={{ fontSize: 14, color: 'var(--muted)', marginBottom: 32 }}>
             <Link to="/heating" style={{ color: 'var(--muted)' }}>Heating</Link>
             <span style={{ margin: '0 8px' }}>›</span>
-            <span style={{ color: '#1a1a1a', fontWeight: 600 }}>Whole Home Ducted Heating</span>
+            <span style={{ color: '#1a1a1a', fontWeight: 600 }}>{ductedHeating.title}</span>
           </nav>
 
           <div className="section-label">Overview</div>
@@ -40,9 +40,9 @@ export default function DuctedHeating() {
       <section style={{ padding: '0 0 80px', background: 'white' }}>
         <div className="container">
           <div className="section-label">Why choose ducted</div>
-          <h2 className="section-title">Ducted vs. high-wall heat pumps</h2>
+          <h2 className="section-title">Why Choose Ducted Over High-Wall Heat Pumps?</h2>
           <p className="section-subtitle">
-            High-wall split systems are great for heating or cooling a single room. A ducted system changes how the whole home feels.
+            While high-wall split systems are great for heating or cooling individual spaces, a ducted system transforms how your entire home feels.
           </p>
           <div style={{
             display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
@@ -58,9 +58,28 @@ export default function DuctedHeating() {
               </div>
             ))}
           </div>
-          <p style={{ fontSize: 16, color: 'var(--muted)', lineHeight: 1.8, marginTop: 36, maxWidth: 720 }}>
-            {ductedHeating.pairing}
-          </p>
+        </div>
+      </section>
+
+      <section style={{ padding: '0 0 80px', background: 'white' }}>
+        <div className="container">
+          <h2 className="section-title">{ductedHeating.pairing.title}</h2>
+          {ductedHeating.pairing.paragraphs.map((p, i) => (
+            <p key={i} style={{ fontSize: 16, color: 'var(--muted)', lineHeight: 1.8, marginTop: i === 0 ? 16 : 18, maxWidth: 720 }}>
+              {p}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      <section style={{ padding: '0 0 80px', background: 'white' }}>
+        <div className="container">
+          <h2 className="section-title">{ductedHeating.installation.title}</h2>
+          {ductedHeating.installation.paragraphs.map((p, i) => (
+            <p key={i} style={{ fontSize: 16, color: 'var(--muted)', lineHeight: 1.8, marginTop: i === 0 ? 16 : 18, maxWidth: 720 }}>
+              {p}
+            </p>
+          ))}
         </div>
       </section>
 
@@ -95,7 +114,7 @@ export default function DuctedHeating() {
             background: 'var(--light)', border: '1px solid var(--border)',
             borderRadius: 16, padding: 36,
           }}>
-            <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 6 }}>Enquire about ducted heating</h3>
+            <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 6 }}>{ductedHeating.ctaQuestion}</h3>
             <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 26 }}>
               Tell us a little about your home and we'll get back to you within one
               business day.

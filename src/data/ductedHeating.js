@@ -3,43 +3,60 @@
 // reasoning on src/data/highwall.js. Brand sections start with no systems
 // listed; add images (with a link once each system has its own page) the
 // same way src/data/highwall.js does once there is content to show.
+//
+// tagline is empty because the hero title alone already carries the page's
+// marketing line; the intro paragraph below does the rest.
 
 export const ductedHeating = {
   slug: 'ducted-heating',
-  title: 'Whole Home Ducted Heating',
-  tagline: 'One outdoor unit, heat delivered to every room through the ceiling.',
+  title: 'Whole-Home Comfort with Ducted Heat Pump Systems',
+  tagline: '',
   metaDescription:
     'Ducted heat pump systems supplied and installed across the Bay of Plenty by Dekker Air, from Mitsubishi Electric and Rinnai.',
   heroImage: '/images/heating/whole-home-ducted.jpg',
 
   intro: [
-    "A ducted system hides the equipment out of sight and delivers warm, quiet air to every room through outlets in the ceiling, so you get balanced heating and cooling across the whole house — all year round — without a unit on every wall. One outdoor unit, one thermostat, and the system can be zoned so you're only running the rooms you're using.",
-    "We're not tied to one brand, so we'll help you weigh up Mitsubishi Electric against Rinnai for your home, size the system to the floor plan, and install it to the manufacturer's own specification so your warranty stands.",
+    'Enjoy seamless, whisper-quiet climate control throughout your entire home. Ducted heat pump systems offer a comprehensive heating and cooling solution, delivering balanced temperatures across every room—all year round.',
   ],
 
   // The case for ducted over high-wall, as a set of cards — same pattern as
   // lossnay.highlights.
   highlights: [
     {
-      title: 'Even heat in every room',
-      desc: "A high-wall unit heats the room it's in, which often leaves hallways and bedrooms further away colder than the living room. A ducted system sends conditioned air to every room through the same ceiling outlets, so the whole house holds a steady temperature.",
+      title: 'Whole-Home Uniformity',
+      desc: 'High-wall units cool or heat the specific room they are installed in, often creating temperature hot-spots or cold draughts in hallways and adjacent bedrooms. Ducted systems distribute conditioned air evenly throughout every room via discreet ceiling or floor vents.',
     },
     {
-      title: 'Nothing on the wall',
-      desc: 'The fan unit sits out of sight in the ceiling cavity. All you see are discreet ceiling diffusers or floor grilles, instead of a unit taking up wall space in the living room.',
+      title: 'Invisible, Space-Saving Design',
+      desc: 'Unlike high-wall units that take up prominent wall space in living areas, ducted systems are hidden away out of sight in your ceiling cavity or underfloor space. All you see are subtle ceiling diffusers or floor grilles that blend into your interior decor.',
     },
     {
-      title: 'Quieter running',
-      desc: "With the fan unit tucked away rather than mounted on the wall above your head, a ducted system runs noticeably quieter than a high-wall unit blowing straight into the room.",
+      title: 'Whisper-Quiet Operation',
+      desc: 'Because the main indoor central fan unit is housed away in your ceiling or underfloor space, operational noise is significantly reduced compared to wall-mounted units blowing directly into living areas.',
     },
     {
-      title: 'Zone the house to suit',
-      desc: "Group rooms into zones so you can heat the living areas during the day and the bedrooms at night, rather than running the whole house at once — which helps keep the power bill down too.",
+      title: 'Multi-Zone Control',
+      desc: 'Modern ducted setups allow you to group rooms into distinct "zones," giving you the flexibility to heat living areas during the day and bedrooms at night—helping to optimise energy consumption and keep power bills lower.',
     },
   ],
 
-  pairing:
-    "A ducted system also pairs well with a balanced ventilation system like Lossnay, bringing in filtered fresh air and clearing out stale, damp air without losing the heat you've already paid for.",
+  pairing: {
+    title: 'Seamless Pairing with Ventilation Systems',
+    paragraphs: [
+      'For a complete indoor environmental setup, most ducted heat pump systems can be seamlessly paired with balanced home ventilation systems.',
+      "Combining ducted heating and cooling with heat-recovery ventilation ensures your home receives a continuous supply of filtered, fresh outdoor air while removing stale indoor moisture, VOCs, and allergens—all without sacrificing your home's energy efficiency or thermal comfort.",
+    ],
+  },
+
+  installation: {
+    title: 'Expert Design & Professional Installation',
+    paragraphs: [
+      'Getting the most out of a ducted heat pump system requires precise sizing, smart layout planning, and quality craftsmanship.',
+      "Our team of experienced HVAC professionals brings deep product knowledge and hands-on installation expertise to every project. We work closely with you to assess your home's layout, design a custom ducting plan tailored to your lifestyle, and execute a flawless installation to ensure maximum efficiency, quiet operation, and long-term reliability.",
+    ],
+  },
+
+  ctaQuestion: "Ready to transform your home's climate control?",
 
   brands: [
     {

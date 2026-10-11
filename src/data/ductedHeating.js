@@ -70,7 +70,7 @@ export const ductedHeating = {
       logo: '/images/heating/rinnai-logo.webp',
       intro: "Rinnai's ducted heat pumps heat and cool the whole home from one outdoor unit, built for New Zealand conditions.",
       images: [
-        { src: '/images/heating/ducted-system-diagram.jpg', caption: 'Pro Series 2 Ducted Central Heating & Cooling System' },
+        { src: '/images/heating/ducted-system-diagram.jpg', caption: 'Pro Series 2 Ducted Central Heating & Cooling System', link: '/heating/rinnai-pro-series-2-ducted' },
       ],
     },
   ],

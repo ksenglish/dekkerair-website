@@ -22,6 +22,7 @@ import EfDesignerSmart from './pages/EfDesignerSmart'
 import GsSeries from './pages/GsSeries'
 import LnBlackDiamond from './pages/LnBlackDiamond'
 import RinnaiProSeries2 from './pages/RinnaiProSeries2'
+import RinnaiProSeries2Ducted from './pages/RinnaiProSeries2Ducted'
 import './index.css'
 
 export default function App() {
@@ -57,6 +58,7 @@ export default function App() {
           <Route path="/heating/gs-series" element={<GsSeries />} />
           <Route path="/heating/ln-black-diamond" element={<LnBlackDiamond />} />
           <Route path="/heating/rinnai-pro-series-2" element={<RinnaiProSeries2 />} />
+          <Route path="/heating/rinnai-pro-series-2-ducted" element={<RinnaiProSeries2Ducted />} />
 
           {/* A page per positive pressure system, each starting the calculator on it.
               Declared after the kinds above, but the paths are longer so they win. */}

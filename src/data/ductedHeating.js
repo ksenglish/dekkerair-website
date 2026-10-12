@@ -13,7 +13,7 @@ export const ductedHeating = {
   tagline: '',
   metaDescription:
     'Ducted heat pump systems supplied and installed across the Bay of Plenty by Dekker Air, from Mitsubishi Electric and Rinnai.',
-  heroImage: '/images/heating/whole-home-ducted.jpg',
+  heroImage: '/images/heating/mitsubishi-ducted-lifestyle.jpg',
 
   intro: [
     'Enjoy seamless, whisper-quiet climate control throughout your entire home. Ducted heat pump systems offer a comprehensive heating and cooling solution, delivering balanced temperatures across every room—all year round.',

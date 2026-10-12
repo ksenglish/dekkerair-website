@@ -18,6 +18,7 @@ export default function DuctedHeating() {
         title={ductedHeating.title}
         subtitle={ductedHeating.tagline}
         image={ductedHeating.heroImage}
+        imagePosition="top"
       />
 
       <section style={{ padding: '80px 0 24px', background: 'white' }}>

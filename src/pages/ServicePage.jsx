@@ -176,11 +176,13 @@ export default function ServicePage({ slug }) {
 
       {service.calculator === 'heat-pump' && <HeatPumpCalculator />}
 
-      <ImageGallery
-        images={service.images}
-        title={`${service.title} we install`}
-        captionStyle={service.slug === 'heating' ? { textAlign: 'center', fontWeight: 600 } : undefined}
-      />
+      {service.slug !== 'hvac-servicing' && (
+        <ImageGallery
+          images={service.images}
+          title={`${service.title} we install`}
+          captionStyle={service.slug === 'heating' ? { textAlign: 'center', fontWeight: 600 } : undefined}
+        />
+      )}
 
       {service.slug === 'ventilation' && <LossnayPromo background="var(--light)" />}
 

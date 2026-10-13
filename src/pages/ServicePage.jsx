@@ -202,7 +202,7 @@ export default function ServicePage({ slug }) {
               borderRadius: 16,
               padding: 32,
             }}>
-              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Enquire about {service.title.toLowerCase()}</h3>
+              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Enquire about {service.title.toLowerCase().replace('hvac', 'HVAC')}</h3>
               <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 24 }}>
                 We'll get back to you within one business day.
               </p>

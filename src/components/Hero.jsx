@@ -12,7 +12,7 @@ export default function Hero() {
       overflow: 'hidden',
       backgroundImage: 'url(/images/heating/ef-series-lifestyle-lounge.jpg)',
       backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundPosition: 'top left',
     }}>
       {/* Dark overlay */}
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.35)' }} />

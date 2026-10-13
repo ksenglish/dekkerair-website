@@ -7,6 +7,8 @@ export const services = [
     slug: 'heating',
     title: 'Heating',
     icon: '☀️',
+    heroImage: '/images/heating/ef-series-lifestyle-lounge.jpg',
+    heroImagePosition: 'top',
     // Renders the sizing calculator on this page — see ServicePage.jsx
     calculator: 'heat-pump',
     images: [
@@ -156,6 +158,8 @@ export const services = [
 
   {
     slug: 'hvac-servicing',
+    heroImage: '/images/heating/ef-series-lifestyle-lounge.jpg',
+    heroImagePosition: 'top',
     images: [
       { src: '/images/hvac-servicing/filters.webp', caption: 'Filters, clean and clogged' },
       { src: '/images/hvac-servicing/filter-box.webp', caption: 'Filter box' },

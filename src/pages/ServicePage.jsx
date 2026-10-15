@@ -55,7 +55,7 @@ export default function ServicePage({ slug }) {
 
   return (
     <>
-      <PageHero label="Our Services" title={service.title} subtitle={service.tagline} image={service.heroImage} />
+      <PageHero label="Our Services" title={service.title} subtitle={service.tagline} image={service.heroImage} imagePosition={service.heroImagePosition} />
 
       {/* Intro + what we do */}
       <section style={{ padding: '80px 0', background: 'white' }}>
@@ -176,7 +176,13 @@ export default function ServicePage({ slug }) {
 
       {service.calculator === 'heat-pump' && <HeatPumpCalculator />}
 
-      <ImageGallery images={service.images} title={`${service.title} we install`} />
+      {service.slug !== 'hvac-servicing' && (
+        <ImageGallery
+          images={service.images}
+          title={`${service.title} we install`}
+          captionStyle={service.slug === 'heating' ? { textAlign: 'center', fontWeight: 600 } : undefined}
+        />
+      )}
 
       {service.slug === 'ventilation' && <LossnayPromo background="var(--light)" />}
 
@@ -196,7 +202,7 @@ export default function ServicePage({ slug }) {
               borderRadius: 16,
               padding: 32,
             }}>
-              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Enquire about {service.title.toLowerCase()}</h3>
+              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Enquire about {service.title.toLowerCase().replace('hvac', 'HVAC')}</h3>
               <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 24 }}>
                 We'll get back to you within one business day.
               </p>

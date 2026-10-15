@@ -1,0 +1,48 @@
+// High-wall heat pumps across the brands we install. Sits under /heating
+// because that is what a customer is shopping for — see the same reasoning on
+// src/data/airetile.js.
+
+export const highwall = {
+  slug: 'highwall-heat-pumps',
+  title: 'Highwall Heat Pumps',
+  tagline: 'The full range, in a size and finish for every room.',
+  metaDescription:
+    'Highwall heat pumps supplied and installed across the Bay of Plenty by Dekker Air, from Mitsubishi Electric and Rinnai.',
+  heroImage: '/images/heating/highwall-ap-series-lifestyle.jpg',
+  heroImages: [
+    '/images/heating/highwall-ap-series-lifestyle.jpg',
+    '/images/heating/highwall-ap-mini-lifestyle.jpeg',
+    '/images/heating/highwall-ef-designer-smart-lifestyle.jpg',
+    '/images/heating/highwall-gs-series-lifestyle.jpg',
+    '/images/heating/highwall-ln-black-diamond-lifestyle.jpg',
+    '/images/heating/highwall-rinnai-pro-series-2-lifestyle.jpg',
+  ],
+
+  intro: [
+    'A high-wall heat pump is still the simplest way to heat a room, and between the brands we install there is a model for almost every room and budget — from a compact unit for a single bedroom through to a design-led piece for an open-plan living area.',
+    "We're not tied to one brand, so we'll help you pick the series that suits the room and the look you're after, size it properly, and install it to the manufacturer's own specification so your warranty stands.",
+  ],
+
+  brands: [
+    {
+      name: 'Mitsubishi Electric',
+      logo: '/images/heating/mitsubishi-electric-logo.jpg',
+      intro: 'Every model draws on the same reliable platform underneath; what changes between series is the finish, the sound level and the features.',
+      images: [
+        { src: '/images/heating/highwall-ap-series-lifestyle.jpg', caption: 'AP Series', link: '/heating/ap-series' },
+        { src: '/images/heating/highwall-ap-mini-lifestyle.jpeg', caption: 'AP Mini', link: '/heating/ap-mini' },
+        { src: '/images/heating/highwall-ef-designer-smart-lifestyle.jpg', caption: 'EF Designer Smart Series', link: '/heating/ef-designer-smart' },
+        { src: '/images/heating/highwall-gs-series-lifestyle.jpg', caption: 'GS Series', link: '/heating/gs-series' },
+        { src: '/images/heating/highwall-ln-black-diamond-lifestyle.jpg', caption: 'LN Black Diamond Series', link: '/heating/ln-black-diamond' },
+      ],
+    },
+    {
+      name: 'Rinnai',
+      logo: '/images/heating/rinnai-logo.webp',
+      intro: 'The Pro Series 2 brings Wi-Fi app control, geolocation and energy monitoring to a heat pump built for New Zealand conditions.',
+      images: [
+        { src: '/images/heating/highwall-rinnai-pro-series-2-lifestyle.jpg', caption: 'Pro Series 2', link: '/heating/rinnai-pro-series-2' },
+      ],
+    },
+  ],
+}

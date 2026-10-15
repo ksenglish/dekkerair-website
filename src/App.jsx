@@ -14,6 +14,15 @@ import PositivePressureSystem from './pages/PositivePressureSystem'
 import { positivePressureSystems } from './data/positivePressure'
 import Lossnay from './pages/Lossnay'
 import AireTile from './pages/AireTile'
+import Highwall from './pages/Highwall'
+import DuctedHeating from './pages/DuctedHeating'
+import ApSeries from './pages/ApSeries'
+import ApMini from './pages/ApMini'
+import EfDesignerSmart from './pages/EfDesignerSmart'
+import GsSeries from './pages/GsSeries'
+import LnBlackDiamond from './pages/LnBlackDiamond'
+import RinnaiProSeries2 from './pages/RinnaiProSeries2'
+import RinnaiProSeries2Ducted from './pages/RinnaiProSeries2Ducted'
 import './index.css'
 
 export default function App() {
@@ -41,6 +50,15 @@ export default function App() {
 
           {/* Same idea for heating — a branded product with its own page. */}
           <Route path="/heating/airetile-slim-cassette-series" element={<AireTile />} />
+          <Route path="/heating/highwall-heat-pumps" element={<Highwall />} />
+          <Route path="/heating/ducted-heating" element={<DuctedHeating />} />
+          <Route path="/heating/ap-series" element={<ApSeries />} />
+          <Route path="/heating/ap-mini" element={<ApMini />} />
+          <Route path="/heating/ef-designer-smart" element={<EfDesignerSmart />} />
+          <Route path="/heating/gs-series" element={<GsSeries />} />
+          <Route path="/heating/ln-black-diamond" element={<LnBlackDiamond />} />
+          <Route path="/heating/rinnai-pro-series-2" element={<RinnaiProSeries2 />} />
+          <Route path="/heating/rinnai-pro-series-2-ducted" element={<RinnaiProSeries2Ducted />} />
 
           {/* A page per positive pressure system, each starting the calculator on it.
               Declared after the kinds above, but the paths are longer so they win. */}

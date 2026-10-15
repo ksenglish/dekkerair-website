@@ -10,9 +10,9 @@ export default function Hero() {
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
-      backgroundImage: 'url(/hero-bg.jpg)',
+      backgroundImage: 'url(/images/heating/ef-series-lifestyle-lounge.jpg)',
       backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundPosition: 'top left',
     }}>
       {/* Dark overlay */}
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.35)' }} />

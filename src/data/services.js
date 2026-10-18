@@ -17,7 +17,7 @@ export const services = [
       { src: '/images/heating/whole-home-ducted.jpg', caption: 'Whole home ducted heating', link: '/heating/ducted-heating' },
       { src: '/images/heating/rinnai-hydraheat.webp', caption: 'Rinnai Hydraheat' },
       { src: '/images/heating/hot-water-heat-pump.webp', caption: 'Hot water heat pump' },
-      { src: '/images/heating/kw-rapidheat-smart-series.png', caption: 'Floor Console Heating' },
+      { src: '/images/heating/mfz-kw-floor-console-lifestyle.jpg', caption: 'Floor Console Heating' },
     ],
     tagline: 'Warm, dry homes that cost less to run.',
     summary: 'Efficient heating solutions designed to keep your home warm, comfortable and energy efficient through every season.',

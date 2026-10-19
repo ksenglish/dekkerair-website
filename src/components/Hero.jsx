@@ -10,7 +10,7 @@ export default function Hero() {
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
-      backgroundImage: 'url(/images/heating/ef-series-lifestyle-lounge.jpg)',
+      backgroundImage: 'url(/images/heating/ap25-forest-lounge.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'top left',
     }}>

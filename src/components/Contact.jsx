@@ -13,8 +13,8 @@ export default function Contact() {
             <div className="section-label">Get in Touch</div>
             <h2 className="section-title">Request a Free Quote</h2>
             <p className="section-subtitle" style={{ marginBottom: 40 }}>
-              Fill in the form and we'll get back to you within one business day with
-              a no-obligation quote tailored to your needs.
+              Fill in the form and we'll get back to you within one business day to
+              organise a no-obligation quote tailored to your needs.
             </p>
             <ContactDetails />
           </div>

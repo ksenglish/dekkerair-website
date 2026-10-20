@@ -18,7 +18,7 @@ export default function RinnaiProSeries2() {
         title={rinnaiProSeries2.title}
         subtitle={rinnaiProSeries2.tagline}
         image={rinnaiProSeries2.heroImage}
-        imagePosition="top"
+        imagePosition="70% top"
       />
 
       <section style={{ padding: '80px 0', background: 'white' }}>

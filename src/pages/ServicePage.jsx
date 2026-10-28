@@ -10,6 +10,49 @@ import ImageGallery from '../components/ImageGallery'
 import { services, getService } from '../data/services'
 import usePageMeta from '../hooks/usePageMeta'
 
+// Quick links shown on the Heating page only, so a visitor coming from the
+// "Our Services" nav can jump straight to the calculator or a product page
+// instead of scrolling the whole page.
+const quickLinkStyle = {
+  display: 'block', fontSize: 14.5, fontWeight: 600, color: '#1a1a1a',
+  padding: '9px 10px', borderRadius: 8, transition: 'background 0.15s',
+}
+
+function HeatingQuickLinks() {
+  return (
+    <aside style={{
+      background: 'white',
+      border: '1px solid var(--border)',
+      borderRadius: 16,
+      padding: 28,
+      boxShadow: 'var(--shadow)',
+    }}>
+      <h3 style={{
+        fontSize: 13, fontWeight: 700, letterSpacing: '0.1em',
+        textTransform: 'uppercase', marginBottom: 16,
+      }}>Jump straight to</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <a href="#heat-pump-calculator" style={quickLinkStyle}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--light)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+        >Heat pump calculator</a>
+        <Link to="/heating/highwall-heat-pumps" style={quickLinkStyle}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--light)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+        >Highwall heat pumps</Link>
+        <Link to="/heating/ducted-heating" style={quickLinkStyle}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--light)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+        >Ducted heat pumps</Link>
+        <Link to="/heating/airetile-slim-cassette-series" style={quickLinkStyle}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--light)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+        >AireTile Slim Cassette</Link>
+      </div>
+    </aside>
+  )
+}
+
 function Faq({ items }) {
   const [open, setOpen] = useState(null)
 
@@ -73,24 +116,28 @@ export default function ServicePage({ slug }) {
               ))}
             </div>
 
-            <div style={{
-              background: 'var(--light)',
-              border: '1px solid var(--border)',
-              borderRadius: 16,
-              padding: 32,
-            }}>
-              <h3 style={{
-                fontSize: 13, fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', marginBottom: 20,
-              }}>What we do</h3>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 14 }}>
-                {service.offerings.map(o => (
-                  <li key={o} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontSize: 15, lineHeight: 1.6 }}>
-                    <span style={{ color: '#1a1a1a', fontWeight: 700, flexShrink: 0 }}>✓</span>
-                    {o}
-                  </li>
-                ))}
-              </ul>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              {service.slug === 'heating' && <HeatingQuickLinks />}
+
+              <div style={{
+                background: 'var(--light)',
+                border: '1px solid var(--border)',
+                borderRadius: 16,
+                padding: 32,
+              }}>
+                <h3 style={{
+                  fontSize: 13, fontWeight: 700, letterSpacing: '0.1em',
+                  textTransform: 'uppercase', marginBottom: 20,
+                }}>What we do</h3>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  {service.offerings.map(o => (
+                    <li key={o} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontSize: 15, lineHeight: 1.6 }}>
+                      <span style={{ color: '#1a1a1a', fontWeight: 700, flexShrink: 0 }}>✓</span>
+                      {o}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -174,7 +221,11 @@ export default function ServicePage({ slug }) {
         </div>
       </section>
 
-      {service.calculator === 'heat-pump' && <HeatPumpCalculator />}
+      {service.calculator === 'heat-pump' && (
+        <div id="heat-pump-calculator" style={{ scrollMarginTop: 140 }}>
+          <HeatPumpCalculator />
+        </div>
+      )}
 
       {service.slug !== 'hvac-servicing' && (
         <ImageGallery

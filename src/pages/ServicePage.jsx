@@ -14,38 +14,37 @@ import usePageMeta from '../hooks/usePageMeta'
 // "Our Services" nav can jump straight to the calculator or a product page
 // instead of scrolling the whole page.
 const quickLinkStyle = {
-  display: 'block', fontSize: 14.5, fontWeight: 600, color: '#1a1a1a',
+  display: 'block', fontSize: 14.5, fontWeight: 600, color: 'white',
   padding: '9px 10px', borderRadius: 8, transition: 'background 0.15s',
 }
 
 function HeatingQuickLinks() {
   return (
     <aside style={{
-      background: 'white',
-      border: '1px solid var(--border)',
+      background: 'var(--dark)',
       borderRadius: 16,
       padding: 28,
-      boxShadow: 'var(--shadow)',
+      boxShadow: 'var(--shadow-lg)',
     }}>
       <h3 style={{
         fontSize: 13, fontWeight: 700, letterSpacing: '0.1em',
-        textTransform: 'uppercase', marginBottom: 16,
+        textTransform: 'uppercase', marginBottom: 16, color: 'white',
       }}>Jump straight to</h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         <a href="#heat-pump-calculator" style={quickLinkStyle}
-          onMouseEnter={e => e.currentTarget.style.background = 'var(--light)'}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.14)'}
           onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
         >Heat pump calculator</a>
         <Link to="/heating/highwall-heat-pumps" style={quickLinkStyle}
-          onMouseEnter={e => e.currentTarget.style.background = 'var(--light)'}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.14)'}
           onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
         >Highwall heat pumps</Link>
         <Link to="/heating/ducted-heating" style={quickLinkStyle}
-          onMouseEnter={e => e.currentTarget.style.background = 'var(--light)'}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.14)'}
           onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
         >Ducted heat pumps</Link>
         <Link to="/heating/airetile-slim-cassette-series" style={quickLinkStyle}
-          onMouseEnter={e => e.currentTarget.style.background = 'var(--light)'}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.14)'}
           onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
         >AireTile Slim Cassette</Link>
       </div>
